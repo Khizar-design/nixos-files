@@ -159,6 +159,7 @@
     openssh
     unzip
     libreoffice-fresh
+    teams-for-linux
 
     # ── Launcher ──
     fuzzel
