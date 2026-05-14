@@ -1,16 +1,10 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { config, pkgs, inputs, ... }:
 
 {
   imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+    [ ./hardware-configuration.nix ];
 
-  # Bootloader.
+  # ─── Boot ───────────────────────────────────────────────────────────────
   boot.loader.grub = {
     enable = true;
     device = "nodev";
@@ -21,38 +15,87 @@
     canTouchEfiVariables = true;
     efiSysMountPoint = "/boot";
   };
-
-  # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  networking.hostName = "nixos-laptop"; # Define your hostname.
-  networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Enable networking
+  # ─── Networking ─────────────────────────────────────────────────────────
+  networking.hostName = "nixos-laptop";
+  networking.wireless.enable = true;
   networking.networkmanager.enable = true;
   systemd.services.NetworkManager-wait-online.enable = false;
 
-  # Set your time zone.
+  # ─── Time & Locale ──────────────────────────────────────────────────────
   time.timeZone = "America/Edmonton";
-
-  # Select internationalisation properties.
   i18n.defaultLocale = "en_CA.UTF-8";
 
-  # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
     variant = "";
   };
 
-  # Niri
+  # ─── AMD GPU ────────────────────────────────────────────────────────────
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+    extraPackages = with pkgs; [
+      rocmPackages.clr.icd
+    ];
+  };
+  services.xserver.videoDrivers = [ "amdgpu" ];
+
+  # ─── Power Management (laptop) ──────────────────────────────────────────
+  services.tlp = {
+    enable = true;
+    settings = {
+      CPU_SCALING_GOVERNOR_ON_BAT  = "powersave";
+      CPU_SCALING_GOVERNOR_ON_AC   = "performance";
+      CPU_ENERGY_PERF_POLICY_ON_BAT  = "balance_power";
+      CPU_ENERGY_PERF_POLICY_ON_AC   = "performance";
+      CPU_BOOST_ON_BAT = 0;
+      CPU_BOOST_ON_AC  = 1;
+      RUNTIME_PM_ON_BAT = "auto";
+      RUNTIME_PM_ON_AC  = "on";
+      USB_AUTOSUSPEND = 1;
+      WOL_DISABLE = "Y";
+    };
+  };
+
+  services.auto-cpufreq = {
+    enable = true;
+    settings = {
+      battery = {
+        governor = "powersave";
+        turbo = "never";
+      };
+      charger = {
+        governor = "performance";
+        turbo = "auto";
+      };
+    };
+  };
+
+  # TLP conflicts with power-profiles-daemon
+  services.power-profiles-daemon.enable = false;
+
+  # ─── Noctalia Dependencies ───────────────────────────────────────────────
+  services.upower.enable = true;
+
+  # ─── Bluetooth ──────────────────────────────────────────────────────────
+  hardware.bluetooth.enable = true;
+
+  # ─── Audio (PipeWire) ───────────────────────────────────────────────────
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
+  services.pulseaudio.enable = false;
+
+  # ─── Niri (Wayland compositor) ──────────────────────────────────────────
   programs.niri.enable = true;
   services.libinput.enable = true;
 
-  # Display Manager
+  # ─── Display Manager (greetd → niri) ────────────────────────────────────
   services.greetd = {
     enable = true;
     settings.default_session = {
@@ -61,111 +104,150 @@
     };
   };
 
+  # ─── XDG / Portal ───────────────────────────────────────────────────────
   xdg.portal = {
     enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
 
   services.dbus.enable = true;
+
+  # ─── Flatpak ────────────────────────────────────────────────────────────
   services.flatpak.enable = true;
+
+  # ─── Tailscale ──────────────────────────────────────────────────────────
   services.tailscale.enable = true;
+
+  # ─── Firewall ───────────────────────────────────────────────────────────
   networking.firewall = {
     enable = true;
     trustedInterfaces = [ "tailscale0" ];
     allowedUDPPorts = [ config.services.tailscale.port ];
     allowedTCPPortRanges = [ { from = 1714; to = 1764; } ];
-    allowedUDPPortRanges = [ { from = 1714; to = 1764; } ]; 
+    allowedUDPPortRanges = [ { from = 1714; to = 1764; } ];
   };
 
-  # Noctalia Dependencies
-  services.upower.enable = true;
-  services.power-profiles-daemon.enable = true;
-  hardware.bluetooth.enable = true;
-
-  # Sound
-  services.pipewire = {
-    enable = true;
-    pulse.enable = true;
-  };
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  # ─── User ───────────────────────────────────────────────────────────────
   users.users.khizar = {
     isNormalUser = true;
     description = "Khizar";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "wheel" "networkmanager" "audio" "video" "input" ];
+    shell = pkgs.bash;
     packages = with pkgs; [];
   };
 
-  # Allow unfree packages
+  # ─── Packages ───────────────────────────────────────────────────────────
   nixpkgs.config.allowUnfree = true;
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
   environment.systemPackages = with pkgs; [
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    # ── Core ──
+    vim
+    neovim
     wget
     git
     alacritty
-    neovim
     noctalia-shell
     claude-code
+
+    # ── Toolkit ──
+    vlc
+    btop
+    rsync
+    fastfetch
+    bash-completion
+    openssh
+    unzip
+    libreoffice-fresh
+
+    # ── Launcher ──
+    fuzzel
+
+    # ── Wayland desktop ──
+    swaybg        # wallpaper setter (used by noctalia)
+    wlsunset      # night-light / blue-light filter
+
+    # ── Appearance ──
+    capitaine-cursors
+    adw-gtk3
+
+    # ── Fonts ──
+    inter
+    noto-fonts
+    noto-fonts-cjk-sans
+    noto-fonts-color-emoji
+    cantarell-fonts
+    liberation_ttf
+    jetbrains-mono
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.meslo-lg
+    fira-code
+    libre-baskerville
   ];
 
-  # Nix settings
+  # ─── Fonts ──────────────────────────────────────────────────────────────
+  fonts.fontDir.enable = true;
+
+  fonts.packages = with pkgs; [
+    inter
+    noto-fonts
+    noto-fonts-cjk-sans
+    noto-fonts-color-emoji
+    jetbrains-mono
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.meslo-lg
+    fira-code
+    libre-baskerville
+    cantarell-fonts
+  ];
+
+  # ─── Wayland Environment Variables ──────────────────────────────────────
+  environment.sessionVariables = {
+    ELECTRON_OZONE_PLATFORM_HINT = "auto";
+    QT_QPA_PLATFORM              = "wayland";
+    QT_QPA_PLATFORMTHEME         = "gtk3";
+    QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
+    XDG_CURRENT_DESKTOP          = "niri";
+    XDG_SESSION_TYPE             = "wayland";
+  };
+
+  # ─── Touchscreen (disabled) ─────────────────────────────────────────────
+  services.udev.extraRules = ''
+    ACTION=="add|change", ATTRS{name}=="ELAN901C:00 04F3:2EDE", ENV{LIBINPUT_IGNORE_DEVICE}="1"
+  '';
+
+  # ─── GTK / dconf ────────────────────────────────────────────────────────
+  programs.dconf.enable = true;
+
+  # ─── Nix settings ───────────────────────────────────────────────────────
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
     auto-optimise-store = true;
-    };
-
-  nix.gc = {
-	automatic = true;
-	dates = "weekly";
-	options = "--delete-older-than 7d";
   };
 
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 7d";
+  };
+
+  # ─── NAS mount ──────────────────────────────────────────────────────────
   fileSystems."/mnt/nas" = {
     device = "//100.77.111.96/Public";
     fsType = "cifs";
     options = [
       "credentials=/etc/nixos/smb-secrets"
-      "uid=1000"          # Replace with your local user ID
-      "gid=100"           # Replace with your local group ID (usually 100 or 1000)
-      "vers=3.0"          # Use a modern SMB version
+      "uid=1000"
+      "gid=100"
+      "vers=3.0"
       "x-systemd.automount"
       "noauto"
       "x-systemd.idle-timeout=60"
       "x-systemd.device-timeout=5s"
       "x-systemd.mount-timeout=5s"
       "x-systemd.requires=network-online.target"
-      "x-systemd.after=network-online.target"  
+      "x-systemd.after=network-online.target"
     ];
   };
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # List services that you want to enable:
-  
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "25.11"; # Did you read the comment?
-
+  system.stateVersion = "25.11";
 }
