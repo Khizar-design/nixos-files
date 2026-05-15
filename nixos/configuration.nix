@@ -149,6 +149,7 @@
     noctalia-shell
     claude-code
     equibop
+    mc
 
     # ── Toolkit ──
     vlc
@@ -160,6 +161,7 @@
     unzip
     libreoffice-fresh
     teams-for-linux
+    obs-studio
 
     # ── Launcher ──
     fuzzel
