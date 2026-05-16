@@ -149,7 +149,7 @@
     noctalia-shell
     claude-code
     equibop
-    mc
+    lf
 
     # ── Toolkit ──
     vlc
@@ -162,6 +162,7 @@
     libreoffice-fresh
     teams-for-linux
     obs-studio
+    jetbrains.idea
 
     # ── Launcher ──
     fuzzel
