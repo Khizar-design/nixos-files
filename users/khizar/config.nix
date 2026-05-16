@@ -5,7 +5,8 @@
      "alacritty".source = ./dotfiles/alacritty;
      "niri".source = ./dotfiles/niri;
   };
- 
+
+  home.file.".p10k.zsh".source = ./dotfiles/p10k.zsh; 
   dconf.enable = true;
   gtk.enable = true;
 
