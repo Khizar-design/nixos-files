@@ -23,10 +23,10 @@
       nixos-laptop = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
         modules = [
-	  ./modules/system
-	  ./hosts/nixos-laptop
-	  ./modules/home-manager
-	 ];
+          ./modules/system
+          ./hosts/nixos-laptop
+          ./modules/home-manager
+	      ];
       };
     };
   };

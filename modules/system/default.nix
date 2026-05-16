@@ -1,7 +1,6 @@
 { config, pkgs, inputs, ... }:
 {
   imports = [
-    ../../hosts/nixos-laptop/hardware-configuration.nix
     ./boot.nix
     ./core.nix
     ./hardware.nix
