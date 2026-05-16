@@ -148,6 +148,8 @@
     alacritty
     noctalia-shell
     claude-code
+    equibop
+    lf
 
     # ── Toolkit ──
     vlc
@@ -158,6 +160,9 @@
     openssh
     unzip
     libreoffice-fresh
+    teams-for-linux
+    obs-studio
+    jetbrains.idea
 
     # ── Launcher ──
     fuzzel
