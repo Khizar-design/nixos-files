@@ -4,7 +4,7 @@
     isNormalUser = true;
     description = "Khizar";
     extraGroups = [ "wheel" "networkmanager" "audio" "video" "input" ];
-    shell = pkgs.bash;
+    shell = pkgs.zsh;
     packages = with pkgs; [];
   };
 }
