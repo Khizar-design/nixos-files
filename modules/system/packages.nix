@@ -66,4 +66,6 @@
     libre-baskerville
     cantarell-fonts
   ];
+  
+  programs.zsh.enable = true;
 }
