@@ -30,6 +30,7 @@
     # ── Launcher ──
     fuzzel
     walker
+    elephant
 
     # ── Wayland desktop ──
     swaybg
