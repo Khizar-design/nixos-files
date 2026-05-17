@@ -29,8 +29,8 @@
 
     # ── Launcher ──
     fuzzel
-    walker
-    elephant
+    rofi-wayland
+    inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins
 
     # ── Wayland desktop ──
     swaybg

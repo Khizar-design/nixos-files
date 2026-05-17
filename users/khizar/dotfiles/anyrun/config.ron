@@ -1,0 +1,13 @@
+Config(
+      plugins: [
+          "libanyrun_applications.so",
+          "libanyrun_websearch.so",
+      ],
+      width: Width(Fraction(0.35)),
+      height: Height(Pixels(0)),
+      hide_icons: false,
+      ignore_exclusive_zones: false,
+      layer: Overlay,
+      hide_plugin_info: true,
+      close_on_unfocus: true,
+  )
