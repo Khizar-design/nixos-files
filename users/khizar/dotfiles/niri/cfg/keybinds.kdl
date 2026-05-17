@@ -10,7 +10,7 @@ binds {
 
     // ─── Applications ───
     Mod+Return                          hotkey-overlay-title="Open Terminal: Alacritty" { spawn "alacritty"; }
-    Mod+D				hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
+    Mod+D				hotkey-overlay-title="Run an Application: walker" { spawn "walker"; }
     Mod+B                               hotkey-overlay-title="Open Browser: Waterfox" { spawn "flatpak" "run" "net.waterfox.waterfox"; }
     Mod+P                               hotkey-overlay-title="Password Manager: Bitwarden" { spawn "flatpak" "run" "com.bitwarden.desktop"; }
     Mod+ALT+L                           hotkey-overlay-title="Lock Screen: noctalia lock" { spawn-sh "noctalia-shell ipc call lockScreen lock"; }

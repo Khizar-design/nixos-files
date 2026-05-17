@@ -29,6 +29,7 @@
 
     # ── Launcher ──
     fuzzel
+    walker
 
     # ── Wayland desktop ──
     swaybg
