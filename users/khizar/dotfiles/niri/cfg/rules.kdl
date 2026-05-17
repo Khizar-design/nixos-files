@@ -19,6 +19,11 @@
         open-fullscreen true
     }
 
+    window-rule {
+	match app-id="equibop"
+	open-fullscreen true
+    }
+
      // if you use steam you will probably like these
     window-rule {
         match app-id="steam"
