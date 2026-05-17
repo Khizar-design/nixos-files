@@ -4,7 +4,7 @@
   xdg.configFile = {
      "alacritty".source = ./dotfiles/alacritty;
      "niri".source = ./dotfiles/niri;
-     "anyrun".source = ./dotfiles/anyrun
+     "anyrun".source = ./dotfiles/anyrun;
   };
 
   home.file.".p10k.zsh".source = ./dotfiles/p10k.zsh; 

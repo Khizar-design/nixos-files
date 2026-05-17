@@ -29,7 +29,7 @@
 
     # ── Launcher ──
     fuzzel
-    rofi-wayland
+    rofi
     inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins
 
     # ── Wayland desktop ──
