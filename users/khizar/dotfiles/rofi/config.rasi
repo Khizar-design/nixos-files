@@ -1,0 +1,87 @@
+configuration {
+    font:                "Inter 12";
+    show-icons:          true;
+    drun-display-format: "{name}";
+    display-drun:        "";
+    disable-history:     false;
+}
+
+* {
+    bg:         rgba(17, 17, 27, 92%);
+    surface:    rgba(30, 30, 46, 88%);
+    fg:         #cdd6f4;
+    fg-dim:     #585b70;
+    accent:     #89b4fa;
+    accent-dim: rgba(137, 180, 250, 15%);
+
+    background-color: transparent;
+    text-color:       @fg;
+}
+
+window {
+    background-color: @bg;
+    border:           1px;
+    border-color:     rgba(137, 180, 250, 25%);
+    border-radius:    16px;
+    width:            480px;
+}
+
+mainbox {
+    background-color: transparent;
+    padding:          12px;
+    spacing:          8px;
+}
+
+inputbar {
+    background-color: @surface;
+    border-radius:    10px;
+    padding:          10px 14px;
+    spacing:          8px;
+    children:         [prompt, entry];
+}
+
+prompt {
+    background-color: transparent;
+    text-color:       @accent;
+}
+
+entry {
+    background-color:  transparent;
+    text-color:        @fg;
+    placeholder:       "Search applications...";
+    placeholder-color: @fg-dim;
+    cursor:            text;
+}
+
+listview {
+    background-color: transparent;
+    lines:            7;
+    columns:          1;
+    spacing:          2px;
+    scrollbar:        false;
+    padding:          4px 0 0 0;
+}
+
+element {
+    background-color: transparent;
+    border-radius:    10px;
+    padding:          9px 12px;
+    spacing:          12px;
+}
+
+element selected {
+    background-color: @accent-dim;
+    border:           1px;
+    border-color:     @accent;
+}
+
+element-icon {
+    background-color: transparent;
+    size:             22px;
+}
+
+element-text {
+    background-color: transparent;
+    text-color:       @fg;
+    vertical-align:   0.5;
+}

@@ -10,4 +10,5 @@ Config(
       layer: Overlay,
       hide_plugin_info: true,
       close_on_unfocus: true,
+      position: Center,
   )

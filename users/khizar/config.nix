@@ -5,6 +5,7 @@
      "alacritty".source = ./dotfiles/alacritty;
      "niri".source = ./dotfiles/niri;
      "anyrun".source = ./dotfiles/anyrun;
+     "rofi".source = ./dotfiles/rofi;
   };
 
   home.file.".p10k.zsh".source = ./dotfiles/p10k.zsh; 
