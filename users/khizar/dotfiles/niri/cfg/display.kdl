@@ -12,7 +12,7 @@ output "eDP-1" {
 // Dummy HDMI plug — streamed to iPad Pro 13" (2024) via Sunshine/Moonlight
 // x=1536 is the logical width of eDP-1 (1920 physical ÷ 1.25 scale)
 output "HDMI-A-1" {
-    mode "2880x1800@60.002"
-    scale 1.0
+    mode "2560x1600@59.972"
+    scale 2
     position x=1536 y=0
 }
