@@ -10,4 +10,6 @@
   services.xserver.videoDrivers = [ "amdgpu" ];
 
   hardware.bluetooth.enable = true;
+
+  hardware.uinput.enable = true;
 }

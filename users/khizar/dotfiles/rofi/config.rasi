@@ -7,12 +7,13 @@ configuration {
 }
 
 * {
-    bg:         rgba(17, 17, 27, 92%);
-    surface:    rgba(30, 30, 46, 88%);
-    fg:         #cdd6f4;
-    fg-dim:     #585b70;
-    accent:     #89b4fa;
-    accent-dim: rgba(137, 180, 250, 15%);
+    bg:          rgba(17, 17, 27, 92%);
+    surface:     rgba(30, 30, 46, 88%);
+    fg:          #cdd6f4;
+    fg-muted:    #9399b2;
+    placeholder: #585b70;
+    accent:      #89b4fa;
+    accent-dim:  rgba(137, 180, 250, 15%);
 
     background-color: transparent;
     text-color:       @fg;
@@ -49,7 +50,7 @@ entry {
     background-color:  transparent;
     text-color:        @fg;
     placeholder:       "Search applications...";
-    placeholder-color: @fg-dim;
+    placeholder-color: @placeholder;
     cursor:            text;
 }
 
@@ -69,10 +70,21 @@ element {
     spacing:          12px;
 }
 
-element selected {
+element normal.normal {
+    background-color: transparent;
+    text-color:       @fg-muted;
+}
+
+element alternate.normal {
+    background-color: transparent;
+    text-color:       @fg-muted;
+}
+
+element selected.normal {
     background-color: @accent-dim;
     border:           1px;
     border-color:     @accent;
+    text-color:       @fg;
 }
 
 element-icon {
@@ -82,6 +94,6 @@ element-icon {
 
 element-text {
     background-color: transparent;
-    text-color:       @fg;
+    text-color:       inherit;
     vertical-align:   0.5;
 }

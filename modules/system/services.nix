@@ -57,7 +57,21 @@
 
   services.udev.extraRules = ''
     ACTION=="add|change", ATTRS{name}=="ELAN901C:00 04F3:2EDE", ENV{LIBINPUT_IGNORE_DEVICE}="1"
+    KERNEL=="uinput", MODE="0660", GROUP="input", SYMLINK+="uinput"
   '';
+
+  services.sunshine = {
+    enable      = true;
+    autoStart   = true;
+    capSysAdmin = true;
+    openFirewall = true;
+  };
+
+  systemd.user.services.sunshine.environment = {
+    XDG_RUNTIME_DIR = "/run/user/1000";
+    PULSE_SERVER    = "unix:/run/user/1000/pulse/native";
+    WAYLAND_DISPLAY = "wayland-1";
+  };
 
   fileSystems."/mnt/nas" = {
     device = "//100.77.111.96/Public";
