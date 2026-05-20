@@ -38,7 +38,7 @@
         specialArgs = { inherit inputs; };
         modules = [
           ./modules/system
-          ./hosts/nixos-pc
+          ./hosts/nixos-PC
           ./modules/home-manager
 	      ];
       };
