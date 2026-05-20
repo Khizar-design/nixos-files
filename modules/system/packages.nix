@@ -25,6 +25,7 @@
     libreoffice-fresh
     teams-for-linux
     obs-studio
+    tree
     jetbrains.idea
 
     # ── Launcher ──
