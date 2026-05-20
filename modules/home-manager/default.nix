@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ inputs, hostName, ... }:
 
 {
   imports = [
@@ -9,7 +9,7 @@
     useGlobalPkgs = true;
     useUserPackages = true;
     backupFileExtension = "backup";
-    extraSpecialArgs = { inherit inputs; };
+    extraSpecialArgs = { inherit inputs hostName; };
     
     # Points to your user configuration folder
     users.khizar = import ../../users/khizar; 

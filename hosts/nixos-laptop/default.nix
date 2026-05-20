@@ -1,6 +1,7 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ../../modules/features/laptop.nix
   ];
 
   networking.hostName = "nixos-laptop";

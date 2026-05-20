@@ -1,14 +1,26 @@
-{ config, pkgs, ... }:
+{ config, pkgs, hostName, ... }:
 
 {
   xdg.configFile = {
-     "alacritty".source = ./dotfiles/alacritty;
-     "niri".source = ./dotfiles/niri;
-     "anyrun".source = ./dotfiles/anyrun;
-     "rofi".source = ./dotfiles/rofi;
+    "alacritty".source = ./dotfiles/alacritty;
+    "anyrun".source   = ./dotfiles/anyrun;
+    "rofi".source     = ./dotfiles/rofi;
+
+    "niri/config.kdl".source          = ./dotfiles/niri/config.kdl;
+    "niri/cfg/animation.kdl".source   = ./dotfiles/niri/cfg/animation.kdl;
+    "niri/cfg/autostart.kdl".source   = ./dotfiles/niri/cfg/autostart.kdl;
+    "niri/cfg/input.kdl".source       = ./dotfiles/niri/cfg/input.kdl;
+    "niri/cfg/keybinds.kdl".source    = ./dotfiles/niri/cfg/keybinds.kdl;
+    "niri/cfg/layout.kdl".source      = ./dotfiles/niri/cfg/layout.kdl;
+    "niri/cfg/misc.kdl".source        = ./dotfiles/niri/cfg/misc.kdl;
+    "niri/cfg/rules.kdl".source       = ./dotfiles/niri/cfg/rules.kdl;
+
+    "niri/cfg/display.kdl".source = if hostName == "nixos-pc"
+      then ./dotfiles/niri/cfg/display-pc.kdl
+      else ./dotfiles/niri/cfg/display-laptop.kdl;
   };
 
-  home.file.".p10k.zsh".source = ./dotfiles/p10k.zsh; 
+  home.file.".p10k.zsh".source = ./dotfiles/p10k.zsh;
   dconf.enable = true;
   gtk.enable = true;
 

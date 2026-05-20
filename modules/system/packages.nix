@@ -36,6 +36,7 @@
     # ── Wayland desktop ──
     swaybg
     wlsunset
+    xwayland-satellite
 
     # ── Appearance ──
     capitaine-cursors

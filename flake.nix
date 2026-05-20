@@ -26,7 +26,7 @@
   outputs = inputs@{ self, nixpkgs, ...}: {
     nixosConfigurations = {
       nixos-laptop = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs; };
+        specialArgs = { inherit inputs; hostName = "nixos-laptop"; };
         modules = [
           ./modules/system
           ./hosts/nixos-laptop
@@ -35,7 +35,7 @@
       };
 
       nixos-pc = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs; };
+        specialArgs = { inherit inputs; hostName = "nixos-pc"; };
         modules = [
           ./modules/system
           ./hosts/nixos-PC

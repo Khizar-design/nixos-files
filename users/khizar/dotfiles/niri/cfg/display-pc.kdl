@@ -1,0 +1,18 @@
+// ────────────── Output Configuration ──────────────
+// You can run `niri msg outputs` to get the correct name for your displays.
+// https://github.com/YaLTeR/niri/wiki/Configuration:-Outputs
+
+// Left monitor (DP-2) — Microstep MAG 276CXF
+// Supports up to 280Hz; bump mode to 240.000 or 280.003 if desired.
+output "DP-2" {
+    mode "1920x1080@165.000"
+    scale 1.0
+    position x=0 y=0
+}
+
+// Right monitor (DP-1) — Microstep MAG 276CXF
+output "DP-1" {
+    mode "1920x1080@165.000"
+    scale 1.0
+    position x=1920 y=0
+}

@@ -8,7 +8,6 @@
     ./services.nix
     ./packages.nix
     ./users.nix
-    ./gaming.nix
-    ./virtualisation.nix
+./virtualisation.nix
   ];
 }
