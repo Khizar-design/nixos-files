@@ -33,6 +33,16 @@
           ./modules/home-manager
 	      ];
       };
+
+      nixos-pc = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./modules/system
+          ./hosts/nixos-pc
+          ./modules/home-manager
+	      ];
+      };
+
     };
   };
 }
