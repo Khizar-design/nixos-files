@@ -43,7 +43,7 @@
     device = "//100.77.111.96/Public";
     fsType = "cifs";
     options = [
-      "credentials=/etc/nixos/smb-secrets"
+      "credentials=/home/khizar/nixos-files/smb-secrets"
       "uid=1000"
       "gid=100"
       "vers=3.0"
