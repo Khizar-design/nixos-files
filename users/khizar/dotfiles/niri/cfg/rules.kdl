@@ -22,6 +22,7 @@
     window-rule {
 	match app-id="equibop"
 	open-fullscreen true
+	open-on-output "DP-1"
     }
 
      // if you use steam you will probably like these
