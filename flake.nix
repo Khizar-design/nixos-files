@@ -21,9 +21,11 @@
 
     nix-flatpak.url = "github:gmodena/nix-flatpak";
 
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    
   };
 
-  outputs = inputs@{ self, nixpkgs, ...}: {
+  outputs = inputs@{ self, nixpkgs, nixos-hardware, ...}: {
     nixosConfigurations = {
       nixos-laptop = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; hostName = "nixos-laptop"; };

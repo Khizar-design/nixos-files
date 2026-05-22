@@ -2,6 +2,8 @@
   imports = [
     ./hardware-configuration.nix
     ../../modules/features/laptop.nix
+    
+    <nixos-hardware/lenovo/thinkpad/e14/amd>
   ];
 
   networking.hostName = "nixos-laptop";
