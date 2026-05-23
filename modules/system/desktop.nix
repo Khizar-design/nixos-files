@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   programs.niri.enable = true;
   programs.xwayland.enable = true;
@@ -15,7 +15,7 @@
   xdg.portal = {
     enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-wlr ];
-    config.niri.default = [ "wlr" "gtk" ];
+    config.niri.default = lib.mkForce [ "wlr" "gtk" ];
   };
 
   environment.sessionVariables = {
