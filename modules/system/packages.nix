@@ -27,7 +27,7 @@
     obs-studio
     tree
     jetbrains.idea
-    input.vm-curator.packages.${pkgs.system}.default
+    inputs.vm-curator.packages.${pkgs.system}.default
 
     # ── Launcher ──
     fuzzel
