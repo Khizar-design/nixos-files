@@ -37,15 +37,11 @@
   services.logind = {
     lidSwitch = "suspend-then-hibernate";
     lidSwitchExternalPower = "suspend-then-hibernate";
-    extraConfig = ''
-      HandlePowerKey=hibernate
-    '';
+    settings.Login.HandlePowerKey = "hibernate";
   };
 
   # Delay before suspend transitions to hibernate
-  systemd.sleep.extraConfig = ''
-    HibernateDelaySec=10min
-  '';
+  systemd.sleep.settings.Sleep.HibernateDelaySec = "10min";
 
   # Suppress the ELAN touchpad — it double-fires with the real input device
   services.udev.extraRules = ''
