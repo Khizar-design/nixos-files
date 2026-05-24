@@ -22,6 +22,8 @@
     nix-flatpak.url = "github:gmodena/nix-flatpak";
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+
+    vm-curator.url = "github:mroboff/vm-curator";
     
   };
 
