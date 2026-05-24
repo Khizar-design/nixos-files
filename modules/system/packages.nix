@@ -11,6 +11,7 @@
     alacritty
     noctalia-shell
     claude-code
+    equibop
     lf
 
     # ── Toolkit ──
