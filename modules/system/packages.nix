@@ -27,6 +27,7 @@
     obs-studio
     tree
     jetbrains.idea
+    vm-curator
 
     # ── Launcher ──
     fuzzel
