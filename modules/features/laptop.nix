@@ -33,6 +33,20 @@
   # TLP conflicts with power-profiles-daemon
   services.power-profiles-daemon.enable = false;
 
+  # Lid close: suspend, then hibernate after 10 min of inactivity
+  services.logind = {
+    lidSwitch = "suspend-then-hibernate";
+    lidSwitchExternalPower = "suspend-then-hibernate";
+    extraConfig = ''
+      HandlePowerKey=hibernate
+    '';
+  };
+
+  # Delay before suspend transitions to hibernate
+  systemd.sleep.extraConfig = ''
+    HibernateDelaySec=10min
+  '';
+
   # Suppress the ELAN touchpad — it double-fires with the real input device
   services.udev.extraRules = ''
     ACTION=="add|change", ATTRS{name}=="ELAN901C:00 04F3:2EDE", ENV{LIBINPUT_IGNORE_DEVICE}="1"
