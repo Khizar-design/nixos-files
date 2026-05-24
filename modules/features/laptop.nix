@@ -34,10 +34,10 @@
   services.power-profiles-daemon.enable = false;
 
   # Lid close: suspend, then hibernate after 10 min of inactivity
-  services.logind = {
-    lidSwitch = "suspend-then-hibernate";
-    lidSwitchExternalPower = "suspend-then-hibernate";
-    settings.Login.HandlePowerKey = "hibernate";
+  services.logind.settings.Login = {
+    HandleLidSwitch = "suspend-then-hibernate";
+    HandleLidSwitchExternalPower = "suspend-then-hibernate";
+    HandlePowerKey = "hibernate";
   };
 
   # Delay before suspend transitions to hibernate
