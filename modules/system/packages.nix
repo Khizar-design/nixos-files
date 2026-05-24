@@ -27,13 +27,12 @@
     obs-studio
     tree
     jetbrains.idea
-    vm-curator
+    input.vm-curator.packages.${pkgs.system}.default
 
     # ── Launcher ──
     fuzzel
     rofi
-    inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins
-
+    
     # ── Wayland desktop ──
     swaybg
     wlsunset
