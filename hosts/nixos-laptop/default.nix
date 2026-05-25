@@ -9,6 +9,9 @@
 
   networking.hostName = "nixos-laptop";
 
+  # Resume device for hibernate — swap partition UUID (laptop-specific)
+  boot.resumeDevice = "/dev/disk/by-uuid/0b01cb0b-40e4-4ce1-a771-4094cffcc4ac";
+
   fileSystems."/mnt/Lexar" = {
     device = "/dev/disk/by-uuid/14237b4d-f67f-4f56-b4ce-8a3b7ef88c6a";
     fsType = "ext4";
