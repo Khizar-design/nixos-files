@@ -28,6 +28,7 @@
     tree
     jetbrains.idea
     inputs.vm-curator.packages.${pkgs.system}.default
+    poppler_utils
 
     # ── Launcher ──
     fuzzel
