@@ -13,6 +13,7 @@
     claude-code
     equibop
     lf
+    obsidian
 
     # ── Toolkit ──
     vlc
