@@ -15,7 +15,10 @@
   xdg.portal = {
     enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-wlr ];
-    config.niri.default = lib.mkForce [ "wlr" "gtk" ];
+    config.niri = {
+      default = lib.mkForce [ "wlr" "gtk" ];
+      "org.freedesktop.impl.portal.Camera" = [ "gtk" ];
+    };
   };
 
   environment.sessionVariables = {

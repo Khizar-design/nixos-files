@@ -14,6 +14,12 @@
     equibop
     lf
     obsidian
+    (slack.overrideAttrs (old: {
+      installPhase = old.installPhase + ''
+        wrapProgram $out/bin/slack \
+          --add-flags "--enable-features=WebRTCPipeWireCapturer"
+      '';
+    }))
 
     # ── Toolkit ──
     vlc
