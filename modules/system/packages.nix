@@ -20,6 +20,7 @@
           --add-flags "--enable-features=WebRTCPipeWireCapturer"
       '';
     }))
+    inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
 
     # ── Toolkit ──
     vlc
@@ -38,7 +39,6 @@
     poppler-utils
 
     # ── Launcher ──
-    fuzzel
     rofi
     
     # ── Wayland desktop ──
