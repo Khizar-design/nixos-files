@@ -6,6 +6,7 @@
     # ── Core ──
     vim
     neovim
+    hyfetch
     wget
     git
     alacritty
@@ -26,7 +27,6 @@
     vlc
     btop
     rsync
-    fastfetch
     bash-completion
     openssh
     unzip
