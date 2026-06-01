@@ -9,8 +9,7 @@
     }
 
     window-rule {
-        match app-id="waterfox"
-        open-fullscreen true
+        match app-id="zen"
         open-on-workspace "net"
     }
 
