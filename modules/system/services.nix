@@ -27,6 +27,13 @@
     KERNEL=="uinput", MODE="0660", GROUP="input", SYMLINK+="uinput"
   '';
 
+  services.syncthing = {
+    enable = true;
+    user = "khizar";
+    dataDir = "/home/khizar";
+    openDefaultPorts = true;
+  };
+
   services.sunshine = {
     enable      = true;
     autoStart   = true;
