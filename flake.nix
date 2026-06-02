@@ -29,7 +29,7 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     vm-curator.url = "github:mroboff/vm-curator";
-    
+
   };
 
   outputs = inputs@{ self, nixpkgs, nixos-hardware, ...}: {
