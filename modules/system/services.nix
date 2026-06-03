@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, ... }:
 {
   services.ollama = {
     enable = true;
@@ -51,22 +51,6 @@
     XDG_RUNTIME_DIR = "/run/user/1000";
     PULSE_SERVER    = "unix:/run/user/1000/pulse/native";
     WAYLAND_DISPLAY = "wayland-1";
-  };
-
-  systemd.services.odysseus = {
-    description = "Odysseus AI Workspace (podman-compose)";
-    after    = [ "network-online.target" "podman.service" ];
-    wants    = [ "network-online.target" ];
-    wantedBy = [ "multi-user.target" ];
-    path     = [ pkgs.podman pkgs.podman-compose ];
-    serviceConfig = {
-      Type             = "oneshot";
-      RemainAfterExit  = true;
-      User             = "khizar";
-      WorkingDirectory = "/home/khizar/odysseus";
-      ExecStart        = "${pkgs.podman-compose}/bin/podman-compose up -d";
-      ExecStop         = "${pkgs.podman-compose}/bin/podman-compose down";
-    };
   };
 
 }
