@@ -37,7 +37,6 @@
       plugins = [
         "git"
         "sudo"
-        "docker"
       ];
     };
 
