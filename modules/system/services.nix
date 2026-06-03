@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 {
   services.ollama = {
     enable = true;
@@ -58,13 +58,14 @@
     after    = [ "network-online.target" "podman.service" ];
     wants    = [ "network-online.target" ];
     wantedBy = [ "multi-user.target" ];
+    path     = [ pkgs.podman pkgs.podman-compose ];
     serviceConfig = {
       Type             = "oneshot";
       RemainAfterExit  = true;
       User             = "khizar";
       WorkingDirectory = "/home/khizar/odysseus";
-      ExecStart        = "/run/current-system/sw/bin/podman-compose up -d";
-      ExecStop         = "/run/current-system/sw/bin/podman-compose down";
+      ExecStart        = "${pkgs.podman-compose}/bin/podman-compose up -d";
+      ExecStop         = "${pkgs.podman-compose}/bin/podman-compose down";
     };
   };
 
