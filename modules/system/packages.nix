@@ -37,6 +37,7 @@
     jetbrains.idea
     inputs.vm-curator.packages.${pkgs.system}.default
     poppler-utils
+    lmstudio
 
     # ── Launcher ──
     rofi

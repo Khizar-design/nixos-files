@@ -3,7 +3,8 @@
   imports = [
     ./hardware-configuration.nix
     ../../modules/features/laptop.nix
-    
+    ../../modules/features/sunshine.nix
+
     inputs.nixos-hardware.nixosModules.lenovo-thinkpad-e14-amd
   ];
 

@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ ... }:
 {
   imports = [
     ./hardware-configuration.nix
@@ -43,19 +43,4 @@
     ];
   };
 
-  systemd.services.odysseus = {
-    description = "Odysseus AI Workspace (podman-compose)";
-    after    = [ "network-online.target" "podman.service" ];
-    wants    = [ "network-online.target" ];
-    wantedBy = [ "multi-user.target" ];
-    path     = [ pkgs.podman pkgs.podman-compose ];
-    serviceConfig = {
-      Type             = "oneshot";
-      RemainAfterExit  = true;
-      User             = "khizar";
-      WorkingDirectory = "/home/khizar/odysseus";
-      ExecStart        = "${pkgs.podman-compose}/bin/podman-compose up -d";
-      ExecStop         = "${pkgs.podman-compose}/bin/podman-compose down";
-    };
-  };
 }
