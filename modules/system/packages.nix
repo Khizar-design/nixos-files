@@ -35,6 +35,7 @@
     obs-studio
     tree
     jetbrains.idea
+    vscode
     inputs.vm-curator.packages.${pkgs.system}.default
     poppler-utils
     lmstudio
