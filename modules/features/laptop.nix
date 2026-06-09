@@ -43,6 +43,8 @@
   # Delay before suspend transitions to hibernate
   systemd.sleep.settings.Sleep.HibernateDelaySec = "10min";
 
+  services.fwupd.enable = true;
+
   # Suppress the ELAN touchpad — it double-fires with the real input device
   services.udev.extraRules = ''
     ACTION=="add|change", ATTRS{name}=="ELAN901C:00 04F3:2EDE", ENV{LIBINPUT_IGNORE_DEVICE}="1"
