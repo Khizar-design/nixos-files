@@ -3,7 +3,6 @@
 {
   xdg.configFile = {
     "alacritty".source = ./dotfiles/alacritty;
-    "anyrun".source   = ./dotfiles/anyrun;
     "rofi".source     = ./dotfiles/rofi;
 
     "niri/config.kdl".source          = ./dotfiles/niri/config.kdl;
