@@ -12,7 +12,6 @@
     alacritty
     noctalia-shell
     claude-code
-    equibop
     lf
     obsidian
     (slack.overrideAttrs (old: {

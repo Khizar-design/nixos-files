@@ -1,4 +1,4 @@
-{inputs, ...}:
+{inputs, pkgs,  ...}:
 {
   imports = [
     ./hardware-configuration.nix
@@ -9,6 +9,10 @@
   ];
 
   networking.hostName = "nixos-laptop";
+
+  environment.systemPackages = with pkgs; [
+    discord
+  ];
 
   # Resume device for hibernate — swap partition UUID (laptop-specific)
   boot.resumeDevice = "/dev/disk/by-uuid/0b01cb0b-40e4-4ce1-a771-4094cffcc4ac";

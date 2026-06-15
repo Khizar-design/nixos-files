@@ -1,4 +1,4 @@
-{ ... }:
+{pkgs, ... }:
 {
   imports = [
     ./hardware-configuration.nix
@@ -6,6 +6,10 @@
   ];
 
   networking.hostName = "nixos-PC";
+
+  environment.systemPackages = with pkgs; [
+    equibop
+  ];
 
   fileSystems."/mnt/Games" = {
     device = "/dev/disk/by-uuid/bbbe67d6-2b69-4ae2-a0af-24ef2fb9478e";
