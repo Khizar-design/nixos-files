@@ -2,6 +2,10 @@
 {
   nixpkgs.config.allowUnfree = true;
 
+  nixpkgs.config.permittedInsecurePackages = [
+    "nodejs-20.20.2"
+  ];
+
   environment.systemPackages = with pkgs; [
     # ── Core ──
     ethtool
@@ -24,7 +28,6 @@
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
 
     # ── Node.js dev ──
-    nodejs_20
     pnpm
     python3
     gnumake
