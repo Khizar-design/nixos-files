@@ -1,5 +1,22 @@
 { pkgs,inputs,  ... }:
 {
+  nixpkgs.overlays = [
+    (final: prev: {
+      # cantarell-fonts 0.311 fails to build because otfautohint (afdko 5.0.1)
+      # exits non-zero on the uni0424 glyph despite --exclude-glyphs being set.
+      # Patch the build script to use call() instead of check_call() for that step.
+      cantarell-fonts = prev.cantarell-fonts.overrideAttrs (old: {
+        postPatch = (old.postPatch or "") + ''
+          python3 -c "
+        content = open('scripts/make-variable-font.py').read()
+        content = content.replace('subprocess.check_call(', 'subprocess.call(')
+        open('scripts/make-variable-font.py', 'w').write(content)
+        "
+        '';
+      });
+    })
+  ];
+
   nixpkgs.config.allowUnfree = true;
 
   nixpkgs.config.permittedInsecurePackages = [

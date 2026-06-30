@@ -43,6 +43,8 @@
   # Delay before suspend transitions to hibernate
   systemd.sleep.settings.Sleep.HibernateDelaySec = "10min";
 
+  networking.networkmanager.wifi.powersave = false;
+
   services.fwupd.enable = true;
 
   # Suppress the ELAN touchpad — it double-fires with the real input device
