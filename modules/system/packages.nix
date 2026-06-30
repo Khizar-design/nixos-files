@@ -75,6 +75,8 @@
     swaybg
     wlsunset
     xwayland-satellite
+    wl-clipboard
+    cliphist
 
     # ── Appearance ──
     capitaine-cursors
