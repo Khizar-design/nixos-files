@@ -1,5 +1,18 @@
 { pkgs, ... }:
 
+let
+  # awatcher config: rewrite zen-browser's Wayland app-id ("zen") to "Firefox".
+  # ActivityWatch's "Activity -> Browser" view only correlates web-watcher tab
+  # data with periods where the focused window is a *recognised* browser, and
+  # its built-in list knows "firefox"/"chromium" but not "zen". Since zen is
+  # Firefox-based, relabelling it makes the Browser summary work. Without this,
+  # per-tab URLs appear only in the Timeline, not the Browser view.
+  awatcherConfig = pkgs.writeText "awatcher-config.toml" ''
+    [[awatcher.filters]]
+    match-app-id = "zen"
+    replace-app-id = "Firefox"
+  '';
+in
 # ActivityWatch — automatic, fully-local time tracking.
 #
 #   aw-server         serves the database + bundled web UI at http://localhost:5600
@@ -45,7 +58,7 @@
       PartOf = [ "graphical-session.target" ];
     };
     Service = {
-      ExecStart = "${pkgs.awatcher}/bin/awatcher";
+      ExecStart = "${pkgs.awatcher}/bin/awatcher --config ${awatcherConfig}";
       Restart = "on-failure";
       RestartSec = 5;
     };
