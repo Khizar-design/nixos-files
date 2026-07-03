@@ -2,6 +2,7 @@ prefer-no-csd
 
 workspace "main"
 workspace "net"
+workspace "notes"
 
 include "./cfg/animation.kdl"
 include "./cfg/autostart.kdl"
