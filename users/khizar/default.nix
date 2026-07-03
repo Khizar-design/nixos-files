@@ -3,6 +3,7 @@
 {
   imports = [
     ./config.nix
+    ./activitywatch.nix
   ];
   home.username = "khizar";
   home.homeDirectory = "/home/khizar";
