@@ -16,7 +16,7 @@
 
     window-rule {
         match app-id="obsidian"
-        open-on-workspace "obsidian"
+        open-on-workspace "notes"
         open-fullscreen true
     }
 
