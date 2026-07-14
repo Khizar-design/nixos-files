@@ -31,6 +31,10 @@
       package = pkgs.adw-gtk3;
     };
     gtk4.theme = config.gtk.theme;
+    iconTheme = {
+      name = "Papirus-Dark";
+      package = pkgs.papirus-icon-theme;
+    };
     cursorTheme = {
       name = "capitaine-cursors";
       package = pkgs.capitaine-cursors;
@@ -41,6 +45,7 @@
   dconf.settings."org/gnome/desktop/interface" = {
     color-scheme = "prefer-dark";
     gtk-theme = "adw-gtk3-dark";
+    icon-theme = "Papirus-Dark";
   };
 
   programs.zsh = {
