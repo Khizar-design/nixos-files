@@ -23,7 +23,24 @@
 
   home.file.".p10k.zsh".source = ./dotfiles/p10k.zsh;
   dconf.enable = true;
-  gtk.enable = true;
+
+  gtk = {
+    enable = true;
+    theme = {
+      name = "adw-gtk3-dark";
+      package = pkgs.adw-gtk3;
+    };
+    cursorTheme = {
+      name = "capitaine-cursors";
+      package = pkgs.capitaine-cursors;
+      size = 24;
+    };
+  };
+
+  dconf.settings."org/gnome/desktop/interface" = {
+    color-scheme = "prefer-dark";
+    gtk-theme = "adw-gtk3-dark";
+  };
 
   programs.zsh = {
     enable = true;
