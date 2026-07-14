@@ -18,8 +18,8 @@
     alacritty
     noctalia-shell
     claude-code
-    xfce.thunar
-    xfce.tumbler
+    thunar
+    tumbler
     obsidian
     (slack.overrideAttrs (old: {
       installPhase = old.installPhase + ''
