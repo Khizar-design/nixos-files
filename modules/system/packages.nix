@@ -2,11 +2,6 @@
 {
   nixpkgs.config.allowUnfree = true;
 
-  nixpkgs.config.permittedInsecurePackages = [
-    "nodejs-20.20.2"
-    "nodejs-slim-20.20.2"
-  ];
-
   environment.systemPackages = with pkgs; [
     # ── Core ──
     ethtool
