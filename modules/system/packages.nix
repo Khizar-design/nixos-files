@@ -30,7 +30,7 @@
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
 
     # ── Node.js dev ──
-    nodejs_20
+    nodejs_22
     pnpm
     python3
     gnumake
