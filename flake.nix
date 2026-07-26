@@ -25,6 +25,11 @@
 
     vm-curator.url = "github:mroboff/vm-curator";
 
+    winapps = {
+      url = "github:winapps-org/winapps";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
 
   outputs = inputs@{ self, nixpkgs, nixos-hardware, ...}: {

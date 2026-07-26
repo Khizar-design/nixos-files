@@ -3,6 +3,7 @@
   imports = [
     ./hardware-configuration.nix
     ../../modules/features/gaming.nix
+    ../../modules/features/winapps.nix
   ];
 
   networking.hostName = "nixos-PC";
