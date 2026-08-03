@@ -24,6 +24,8 @@
   home.file.".p10k.zsh".source = ./dotfiles/p10k.zsh;
   dconf.enable = true;
 
+  services.easyeffects.enable = true;
+
   gtk = {
     enable = true;
     theme = {
