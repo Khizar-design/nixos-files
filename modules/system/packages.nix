@@ -47,9 +47,6 @@
     poppler-utils
     lmstudio
 
-    # ── Security ──
-    wireshark
-
     # ── Launcher ──
     rofi
     
@@ -94,4 +91,12 @@
   ];
   
   programs.zsh.enable = true;
+
+  # ── Security ──
+  # Installs wireshark, creates the 'wireshark' group, and sets up a setcap
+  # wrapper for dumpcap so group members can capture without root.
+  programs.wireshark = {
+    enable = true;
+    package = pkgs.wireshark; # default is wireshark-cli (no GUI)
+  };
 }
