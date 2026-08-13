@@ -47,6 +47,9 @@
     poppler-utils
     lmstudio
 
+    # ── Security ──
+    wireshark
+
     # ── Launcher ──
     rofi
     
