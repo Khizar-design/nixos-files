@@ -8,6 +8,7 @@
     vim
     neovim
     fastfetch
+    fetch
     wget
     git
     alacritty
