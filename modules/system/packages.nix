@@ -7,7 +7,7 @@
     ethtool
     vim
     neovim
-    hyfetch
+    fastfetch
     wget
     git
     alacritty
