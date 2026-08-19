@@ -4,11 +4,14 @@
     ./hardware-configuration.nix
     ../../modules/features/laptop.nix
     ../../modules/features/sunshine.nix
+    ../../modules/features/blueferry
 
     inputs.nixos-hardware.nixosModules.lenovo-thinkpad-e14-amd
   ];
 
   networking.hostName = "nixos-laptop";
+
+  services.blueferry.enable = true;
 
   environment.systemPackages = with pkgs; [
     discord
