@@ -42,5 +42,18 @@
     };
   };
 
+  # niri ships no polkit agent, so authorization prompts fall back to the tty
+  # agent — invisible to anything launched from the app launcher.
+  systemd.user.services.polkit-gnome-authentication-agent-1 = {
+    description = "Graphical polkit authentication agent";
+    wantedBy = [ "graphical-session.target" ];
+    partOf = [ "graphical-session.target" ];
+    after = [ "graphical-session.target" ];
+    serviceConfig = {
+      ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+      Restart = "on-failure";
+    };
+  };
+
   programs.dconf.enable = true;
 }
