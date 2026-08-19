@@ -21,6 +21,17 @@
 let
   bluetoothd = "${bluez}/libexec/bluetooth/bluetoothd";
   obexd = "${bluez}/libexec/bluetooth/obexd";
+
+  pythonDeps =
+    with python3Packages;
+    [
+      cryptography
+      typer
+      dbus-python
+      pygobject3
+      textual
+    ]
+    ++ lib.optional withQt pyside6;
 in
 python3Packages.buildPythonApplication rec {
   pname = "blueferry";
@@ -39,16 +50,7 @@ python3Packages.buildPythonApplication rec {
     wheel
   ];
 
-  dependencies =
-    with python3Packages;
-    [
-      cryptography
-      typer
-      dbus-python
-      pygobject3
-      textual
-    ]
-    ++ lib.optional withQt pyside6;
+  dependencies = pythonDeps;
 
   nativeBuildInputs = [
     gobject-introspection
@@ -73,6 +75,15 @@ python3Packages.buildPythonApplication rec {
   dontWrapGApps = true;
   preFixup = ''
     makeWrapperArgs+=("''${gappsWrapperArgs[@]}")
+
+    # For pairing, BlueFerry re-launches itself as `sys.executable -m blueferry`
+    # in a D-Bus/GLib-isolated child. nixpkgs injects sys.path into the console
+    # script rather than the environment, so that bare interpreter would not
+    # find the package ("No module named blueferry"). Put the closure on
+    # PYTHONPATH so the child process inherits it.
+    makeWrapperArgs+=(
+      --prefix PYTHONPATH : "${python3Packages.makePythonPath pythonDeps}:$out/${python3Packages.python.sitePackages}"
+    )
   '';
 
   # BlueFerry is written for FHS distros and hardcodes absolute tool paths so a
