@@ -7,6 +7,32 @@
 
 let
   cfg = config.services.blueferry;
+
+  # BlueFerry opens its encrypted store and builds its libnotify sink exactly
+  # once at startup and never retries (event_dispatcher.py `setup()` bails on
+  # `if self.sinks: return`). Under niri both the notification daemon and
+  # gnome-keyring come up as compositor-spawned scopes with no ordering
+  # relative to default.target, so a boot-time start can beat them by a second
+  # and leave the daemon alive-but-useless: no popups, no history, no contacts,
+  # while still logging "ready". Hold ExecStart until both names own the bus.
+  waitForSession = pkgs.writeShellScript "blueferry-wait-session" ''
+    owned() {
+      ${pkgs.systemd}/bin/busctl --user --quiet call \
+        org.freedesktop.DBus /org/freedesktop/DBus org.freedesktop.DBus \
+        GetNameOwner s "$1" >/dev/null 2>&1
+    }
+
+    for _ in $(${pkgs.coreutils}/bin/seq 1 60); do
+      if owned org.freedesktop.Notifications && owned org.freedesktop.secrets; then
+        exit 0
+      fi
+      ${pkgs.coreutils}/bin/sleep 0.5
+    done
+
+    # A degraded daemon still beats no daemon; leave a breadcrumb either way.
+    echo "blueferry: session bus names absent after 30s; starting degraded" >&2
+    exit 0
+  '';
 in
 {
   options.services.blueferry = {
@@ -53,6 +79,7 @@ in
       serviceConfig = {
         Type = "dbus";
         BusName = "io.weirdware.BlueFerry";
+        ExecStartPre = "${waitForSession}";
         ExecStart = "${cfg.package}/bin/blueferry run";
         Restart = "on-failure";
         # EX_TEMPFAIL is the daemon's deliberate upgrade-restart request.
