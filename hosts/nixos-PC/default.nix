@@ -4,9 +4,12 @@
     ./hardware-configuration.nix
     ../../modules/features/gaming.nix
     ../../modules/features/winapps.nix
+    ../../modules/features/blueferry
   ];
 
   networking.hostName = "nixos-PC";
+
+  services.blueferry.enable = true;
 
   environment.systemPackages = with pkgs; [
     equibop
