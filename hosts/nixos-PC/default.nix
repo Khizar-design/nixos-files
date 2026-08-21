@@ -5,6 +5,7 @@
     ../../modules/features/gaming.nix
     ../../modules/features/winapps.nix
     ../../modules/features/blueferry
+    ../../modules/features/openlogi.nix
   ];
 
   networking.hostName = "nixos-PC";
