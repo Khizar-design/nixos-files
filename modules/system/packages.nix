@@ -47,6 +47,7 @@
     inputs.vm-curator.packages.${pkgs.system}.default
     poppler-utils
     lmstudio
+    ani-cli
 
     # ── Launcher ──
     rofi
