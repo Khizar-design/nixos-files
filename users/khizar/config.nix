@@ -26,6 +26,11 @@
 
   services.easyeffects.enable = true;
 
+  programs.mpv.enable = true;
+
+  xdg.configFile."mpv/scripts/skip.lua".source =
+    "${pkgs.ani-skip}/share/mpv/scripts/skip.lua";
+
   gtk = {
     enable = true;
     theme = {

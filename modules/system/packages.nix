@@ -48,6 +48,7 @@
     poppler-utils
     lmstudio
     ani-cli
+    ani-skip
 
     # ── Launcher ──
     rofi
