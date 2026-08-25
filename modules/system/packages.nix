@@ -38,7 +38,7 @@
     bash-completion
     openssh
     unzip
-    libreoffice-fresh
+    libreoffice-stable
     teams-for-linux
     obs-studio
     tree
