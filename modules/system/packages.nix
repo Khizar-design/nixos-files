@@ -24,6 +24,7 @@
       '';
     }))
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
+    castero
 
     # ── Node.js dev ──
     nodejs_22
