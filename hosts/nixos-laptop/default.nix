@@ -5,6 +5,7 @@
     ../../modules/features/laptop.nix
     ../../modules/features/sunshine.nix
     ../../modules/features/blueferry
+    ../../modules/features/noctalia-greeter.nix
 
     inputs.nixos-hardware.nixosModules.lenovo-thinkpad-e14-amd
   ];

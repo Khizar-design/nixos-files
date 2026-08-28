@@ -4,13 +4,9 @@
   programs.xwayland.enable = true;
   services.libinput.enable = true;
 
-  services.greetd = {
-    enable = true;
-    settings.default_session = {
-      command = "${pkgs.niri}/bin/niri-session";
-      user = "khizar";
-    };
-  };
+  # default_session is left to the noctalia-greeter module, which sets the
+  # command via mkDefault; greetd itself defaults the user to "greeter".
+  services.greetd.enable = true;
 
   xdg.portal = {
     enable = true;
