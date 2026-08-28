@@ -10,6 +10,15 @@
 
   networking.hostName = "nixos-PC";
 
+  # PC keeps plain greetd autologin (no noctalia-greeter prompt) — laptop
+  # gets the interactive noctalia-greeter instead. desktop.nix no longer sets
+  # default_session itself since noctalia-greeter now owns that via mkDefault,
+  # so PC needs its own explicit command here.
+  services.greetd.settings.default_session = {
+    command = "${pkgs.niri}/bin/niri-session";
+    user = "khizar";
+  };
+
   services.blueferry.enable = true;
 
   environment.systemPackages = with pkgs; [
