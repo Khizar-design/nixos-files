@@ -7,4 +7,8 @@ systemctl --user import-environment \
   XCURSOR_THEME XCURSOR_SIZE MANGO_INSTANCE_SIGNATURE
 systemctl --user start mango-session.target
 
+# From niri cfg/autostart-pc.kdl. xwayland-satellite is not needed —
+# mango speaks xwayland natively.
 noctalia-shell &
+wl-paste --watch cliphist store &
+equibop &

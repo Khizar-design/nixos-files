@@ -66,6 +66,9 @@ in
         xwayland-satellite
         wl-clipboard
         cliphist
+        # niri had screenshots built in; mango does not.
+        grim
+        slurp
       ];
     })
 
