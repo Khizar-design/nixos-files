@@ -40,6 +40,10 @@ in
 
     services.displayManager.sessionPackages = [ mango-session ];
 
+    # niri's module turns this on too; set it here so a mango-only host still
+    # gets the shared desktop plumbing (XDG_DATA_DIRS, .desktop handling, ...).
+    services.graphical-desktop.enable = lib.mkDefault true;
+
     xdg.portal = {
       configPackages = [ pkgs.mango ];
       config.mango = {
