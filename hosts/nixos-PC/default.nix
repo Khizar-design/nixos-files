@@ -8,9 +8,8 @@
 
   # ── Desktop ────────────────────────────────────────────────────────────────
   khizar.desktop = {
-    niri.enable = true;
+    niri.enable = true; # flip to false to test mango, as the laptop does
     mango.enable = true;
-    default = "niri";
   };
 
   # No noctalia-greeter here, so greetd autologins straight into

@@ -15,11 +15,14 @@ in
 
     default = lib.mkOption {
       type = lib.types.enum [ "niri" "mango" ];
-      default = "niri";
+      default = if cfg.niri.enable then "niri" else "mango";
+      defaultText = lib.literalMD "whichever compositor is enabled; `niri` if both are";
       description = ''
-        Compositor greetd starts for the autologin session. Both compositors can
-        be enabled at once — the laptop's noctalia-greeter then shows a picker
-        and this is only the preselected entry.
+        Compositor greetd starts for the autologin session, and the entry
+        noctalia-greeter preselects in its picker.
+
+        Only worth setting by hand when both compositors are enabled and you
+        want the other one; with a single compositor enabled this follows it.
       '';
     };
   };

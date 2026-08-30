@@ -9,9 +9,8 @@
 
   # ── Desktop ────────────────────────────────────────────────────────────────
   khizar.desktop = {
-    niri.enable = true;
+    niri.enable = false; # flip back to true to get niri in the greeter picker
     mango.enable = true;
-    default = "niri"; # the greeter's picker can still start the other one
   };
 
   # ── Features ───────────────────────────────────────────────────────────────
