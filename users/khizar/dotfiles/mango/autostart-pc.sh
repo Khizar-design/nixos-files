@@ -9,6 +9,10 @@ systemctl --user start mango-session.target
 
 # From niri cfg/autostart-pc.kdl. xwayland-satellite is not needed —
 # mango speaks xwayland natively.
-noctalia-shell &
+# See autostart-laptop.sh: "mango" in XDG_CURRENT_DESKTOP selects noctalia's
+# DWL-IPC backend, which mango 0.16.1 does not implement, leaving the Workspace
+# widget blank. This drops it to the generic ext-workspace backend.
+XDG_CURRENT_DESKTOP=wlroots noctalia-shell &
+
 wl-paste --watch cliphist store &
 equibop &

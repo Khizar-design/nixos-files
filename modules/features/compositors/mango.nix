@@ -3,6 +3,14 @@
 let
   cfg = config.khizar.desktop;
 
+  mangoPortalConfig = {
+    default = [ "gtk" ];
+    "org.freedesktop.impl.portal.ScreenCast" = [ "wlr" ];
+    "org.freedesktop.impl.portal.Screenshot" = [ "wlr" ];
+    # wlr has no Inhibit implementation
+    "org.freedesktop.impl.portal.Inhibit" = [ "gtk" ];
+  };
+
   # mango is wlroots-based and wlr_backend_autocreate picks its backend by
   # sniffing the environment. niri.nix sets DISPLAY=":0" system-wide for
   # xwayland-satellite, and pam_env hands it to every session — so mango would
@@ -46,13 +54,11 @@ in
 
     xdg.portal = {
       configPackages = [ pkgs.mango ];
-      config.mango = {
-        default = [ "gtk" ];
-        "org.freedesktop.impl.portal.ScreenCast" = [ "wlr" ];
-        "org.freedesktop.impl.portal.Screenshot" = [ "wlr" ];
-        # wlr has no Inhibit implementation
-        "org.freedesktop.impl.portal.Inhibit" = [ "gtk" ];
-      };
+      # noctalia-shell is started with XDG_CURRENT_DESKTOP=wlroots (see
+      # dotfiles/mango/autostart-*.sh), so it needs the same portal routing
+      # under that name or its pickers and screencasts fall back to defaults.
+      config.mango = mangoPortalConfig;
+      config.wlroots = mangoPortalConfig;
     };
 
     services.greetd.settings.default_session.command =
