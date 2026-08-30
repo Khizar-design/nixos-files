@@ -1,18 +1,29 @@
-{ pkgs, inputs, ... }:
+{ config, lib, pkgs, inputs, ... }:
+
 {
-  environment.systemPackages = with pkgs; [
-    inputs.winapps.packages.${pkgs.system}.winapps
-    inputs.winapps.packages.${pkgs.system}.winapps-launcher
+  options.khizar.features.winapps.enable =
+    lib.mkEnableOption "WinApps (Windows apps from a podman-backed VM)";
 
-    # WinApps runtime dependencies
-    freerdp
-    dialog
-    libnotify
-    netcat-openbsd
-    curl
-    iproute2
-  ];
+  config = lib.mkIf config.khizar.features.winapps.enable {
+    # WAFLAVOR=podman needs podman-compose, from khizar.features.podman.
+    assertions = [
+      {
+        assertion = config.khizar.features.podman.enable;
+        message = "khizar.features.winapps needs khizar.features.podman.enable = true.";
+      }
+    ];
 
-  # Podman backend for the WinApps Windows VM (WAFLAVOR=podman) needs
-  # podman-compose, already enabled system-wide in virtualisation.nix.
+    environment.systemPackages = with pkgs; [
+      inputs.winapps.packages.${pkgs.system}.winapps
+      inputs.winapps.packages.${pkgs.system}.winapps-launcher
+
+      # WinApps runtime dependencies
+      freerdp
+      dialog
+      libnotify
+      netcat-openbsd
+      curl
+      iproute2
+    ];
+  };
 }

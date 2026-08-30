@@ -1,23 +1,33 @@
-{inputs, pkgs,  ...}:
+{ inputs, pkgs, ... }:
 {
   imports = [
     ./hardware-configuration.nix
-    ../../modules/features/laptop.nix
-    ../../modules/features/sunshine.nix
-    ../../modules/features/blueferry
-    ../../modules/features/noctalia-greeter.nix
-
     inputs.nixos-hardware.nixosModules.lenovo-thinkpad-e14-amd
   ];
 
   networking.hostName = "nixos-laptop";
 
+  # ── Desktop ────────────────────────────────────────────────────────────────
+  khizar.desktop = {
+    niri.enable = true;
+    mango.enable = true;
+    default = "niri"; # the greeter's picker can still start the other one
+  };
+
+  # ── Features ───────────────────────────────────────────────────────────────
+  khizar.features = {
+    laptop.enable = true;
+    sunshine.enable = true;
+    noctaliaGreeter.enable = true;
+  };
+
   services.blueferry.enable = true;
 
-  environment.systemPackages = with pkgs; [
+  khizar.packages.extra = with pkgs; [
     discord
   ];
 
+  # ── Storage ────────────────────────────────────────────────────────────────
   # Resume device for hibernate — swap partition UUID (laptop-specific)
   boot.resumeDevice = "/dev/disk/by-uuid/0b01cb0b-40e4-4ce1-a771-4094cffcc4ac";
 

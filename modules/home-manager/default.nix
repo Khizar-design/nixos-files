@@ -3,6 +3,7 @@
 {
   imports = [
     inputs.home-manager.nixosModules.home-manager
+    ./options.nix
   ];
 
   home-manager = {
@@ -10,8 +11,8 @@
     useUserPackages = true;
     backupFileExtension = "backup";
     extraSpecialArgs = { inherit inputs hostName; };
-    
+
     # Points to your user configuration folder
-    users.khizar = import ../../users/khizar; 
+    users.khizar = import ../../users/khizar;
   };
 }

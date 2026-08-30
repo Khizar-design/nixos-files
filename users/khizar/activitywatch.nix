@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, osConfig, ... }:
 
 let
   # awatcher config: rewrite zen-browser's Wayland app-id ("zen") to "Firefox".
@@ -31,6 +31,8 @@ in
 # also install the "aw-watcher-web" add-on from Firefox Add-ons.
 
 {
+  config = lib.mkIf osConfig.khizar.home.activitywatch.enable {
+
   home.packages = with pkgs; [
     activitywatch
     awatcher
@@ -63,5 +65,6 @@ in
       RestartSec = 5;
     };
     Install.WantedBy = [ "graphical-session.target" ];
+  };
   };
 }

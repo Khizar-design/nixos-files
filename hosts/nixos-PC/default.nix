@@ -1,30 +1,36 @@
-{pkgs, ... }:
+{ pkgs, ... }:
 {
   imports = [
     ./hardware-configuration.nix
-    ../../modules/features/gaming.nix
-    ../../modules/features/winapps.nix
-    ../../modules/features/blueferry
-    ../../modules/features/openlogi.nix
   ];
 
   networking.hostName = "nixos-PC";
 
-  # PC keeps plain greetd autologin (no noctalia-greeter prompt) — laptop
-  # gets the interactive noctalia-greeter instead. desktop.nix no longer sets
-  # default_session itself since noctalia-greeter now owns that via mkDefault,
-  # so PC needs its own explicit command here.
-  services.greetd.settings.default_session = {
-    command = "${pkgs.niri}/bin/niri-session";
-    user = "khizar";
+  # ── Desktop ────────────────────────────────────────────────────────────────
+  khizar.desktop = {
+    niri.enable = true;
+    mango.enable = true;
+    default = "niri";
+  };
+
+  # No noctalia-greeter here, so greetd autologins straight into
+  # khizar.desktop.default; the compositor module supplies the command.
+  services.greetd.settings.default_session.user = "khizar";
+
+  # ── Features ───────────────────────────────────────────────────────────────
+  khizar.features = {
+    gaming.enable = true;
+    winapps.enable = true;
+    openlogi.enable = true;
   };
 
   services.blueferry.enable = true;
 
-  environment.systemPackages = with pkgs; [
+  khizar.packages.extra = with pkgs; [
     equibop
   ];
 
+  # ── Storage ────────────────────────────────────────────────────────────────
   fileSystems."/mnt/Games" = {
     device = "/dev/disk/by-uuid/bbbe67d6-2b69-4ae2-a0af-24ef2fb9478e";
     fsType = "ext4";
@@ -60,5 +66,4 @@
       "x-systemd.after=network-online.target"
     ];
   };
-
 }
