@@ -9,8 +9,8 @@
 
   # ── Desktop ────────────────────────────────────────────────────────────────
   khizar.desktop = {
-    niri.enable = true;
-    mango.enable = false;
+    niri.enable = false;
+    mango.enable = true;
   };
 
   # ── Features ───────────────────────────────────────────────────────────────
