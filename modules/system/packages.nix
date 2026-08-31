@@ -34,6 +34,20 @@ in
       nixpkgs.config.allowUnfree = true;
       programs.zsh.enable = true;
       environment.systemPackages = cfg.extra;
+
+      # noctalia 5.0.0 (nixpkgs' `noctalia`, currently 5.0.0-betaX, fetched
+      # prebuilt from cache.nixos.org) wrapped under the old `noctalia-shell`
+      # command name, so mango's and niri's dotfiles (keybinds, autostart)
+      # keep calling `noctalia-shell` unmodified. Tracks whatever nixpkgs
+      # currently packages as `noctalia`, including its eventual stable release.
+      nixpkgs.overlays = [
+        (final: prev: {
+          noctalia-shell = final.runCommand "noctalia-shell-5.0.0" { } ''
+            mkdir -p $out/bin
+            ln -s ${final.noctalia}/bin/noctalia $out/bin/noctalia-shell
+          '';
+        })
+      ];
     }
 
     (lib.mkIf cfg.core.enable {
