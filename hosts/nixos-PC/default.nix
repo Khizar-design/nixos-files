@@ -12,8 +12,6 @@
     mango.enable = true;
   };
 
-  # No noctalia-greeter here, so greetd autologins straight into
-  # khizar.desktop.default; the compositor module supplies the command.
   services.greetd.settings.default_session.user = "khizar";
 
   # ── Features ───────────────────────────────────────────────────────────────
