@@ -8,7 +8,7 @@
 
   # ── Desktop ────────────────────────────────────────────────────────────────
   khizar.desktop = {
-    niri.enable = true; # flip to false to test mango, as the laptop does
+    niri.enable = false;
     mango.enable = true;
   };
 
