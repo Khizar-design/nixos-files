@@ -1,0 +1,120 @@
+# Ported from noctalia v4.7.7's settings.json (backed up at
+# ~/.config/noctalia.v4.7.7-backup-20260831). Only settings that had a clear
+# v5 equivalent and differed from v5's default are listed here; each is
+# commented with the v4 key it came from. See chat/plan notes for what didn't
+# carry over (no v5 equivalent found).
+
+[shell]
+# v4 had this off (enableClipboardHistory: false, cliphist+rofi handled it
+# instead via SUPER+SHIFT+V). Turned on for v5 per your call — SUPER,v now
+# opens noctalia's own clipboard panel too, alongside cliphist.
+clipboard_enabled = true
+# appLauncher.autoPasteClipboard was false
+clipboard_auto_paste = "off"
+# general.telemetryEnabled
+telemetry_enabled = false
+# general.avatarImage
+avatar_path = "/home/khizar/.face"
+
+[shell.shadow]
+# general.shadowDirection "bottom_right" -> closest v5 role name
+direction = "down_right"
+
+[shell.panel]
+# ui.panelsAttachedToBar was true in v4, but floating+centered is easier to
+# navigate for the launcher, so keep it (and clipboard, same panel family) on
+# v5's own default instead.
+launcher_placement = "floating"
+launcher_position = "center"
+clipboard_placement = "floating"
+clipboard_position = "center"
+# ui.panelBackgroundOpacity (0.8) / translucentWidgets true -> closest v5 mode
+transparency_mode = "soft"
+# general.enableShadows was false
+shadow = false
+
+[wallpaper]
+fill_color = "#000000"          # wallpaper.fillColor
+transition = ["fade", "disc", "stripes", "wipe", "honeycomb"] # wallpaper.transitionType (v4 also had "pixelate"; v5 has no such option, dropped)
+edge_smoothness = 0.05          # wallpaper.transitionEdgeSmoothness
+# wallpaper.skipStartupTransition was false (i.e. DO show it) -> v5's flag is
+# inverted ("animate on startup"), so true here reproduces v4's behavior.
+transition_on_startup = true
+
+[theme]
+mode = "dark"                   # colorSchemes.darkMode
+source = "custom"               # colorSchemes.predefinedScheme "Neon Breach"
+custom_palette = "Neon Breach"
+pure_black_dark = true
+
+[notification]
+background_opacity = 1.0        # notifications.backgroundOpacity
+
+[osd]
+background_opacity = 1.0        # osd.backgroundOpacity
+
+[lockscreen]
+tint_intensity = 0.0            # general.lockScreenTint was 0
+
+[calendar]
+# v4's calendar cards were all enabled; v5's whole calendar feature defaults off.
+enabled = true
+
+[weather]
+# location.weatherEnabled was true (v5 defaults this off)
+enabled = true
+effects = true                  # location.weatherShowEffects
+unit = "celsius"                # location.useFahrenheit was false
+# NOTE: location.autoLocate was false and location.name was blank in v4 too,
+# so weather had no location source there either. Same gap carries over —
+# set [location] address or auto_locate below if you want weather to resolve.
+
+[nightlight]
+temperature_night = 3143        # nightLight.nightTemp (nightlight itself stays disabled, matching v4)
+
+[brightness]
+enable_ddcutil = true           # brightness.enableDdcSupport was true
+
+[idle]
+pre_action_fade_seconds = 5.0   # idle.fadeDuration
+
+[idle.behavior.lock]
+timeout = 660                   # idle.lockTimeout (idle itself stays disabled, matching v4's idle.enabled=false)
+
+[idle.behavior.screen-off]
+timeout = 600                   # idle.screenOffTimeout
+
+[backdrop]
+# general.enableBlurBehind was true
+enabled = true
+
+[bar.main]
+position = "top"                # bar.position
+# thickness/padding: left at v5's defaults (34/14) — porting v4's raw pixel
+# values (8/2) looked cramped once actually rendered at v5's widget scale.
+background_opacity = 0.93       # bar.backgroundOpacity
+radius = 0                      # flush/attached, no pill rounding
+# Full-width, flush against the top edge — no floating pill margins.
+margin_ends = 0
+margin_edge = 0
+
+# bar.widgets.left/center/right, mapped to v5's start/center/end and widget
+# ids (Launcher->launcher, ActiveWindow->active-window, MediaMini->media,
+# SystemMonitor->sysmon, Workspace->workspaces, NotificationHistory->notifications,
+# ControlCenter->control-center). Per-widget styling options (icon colors,
+# scroll behavior, etc.) didn't have matching v5 keys and were dropped.
+start  = ["launcher", "active-window", "media"]
+center = ["sysmon", "workspaces", "clock"]
+end    = ["tray", "notifications", "battery", "volume", "brightness", "control-center"]
+
+[bar.main.dead_zone.actions]
+right = "panel-toggle control-center" # bar.rightClickAction "controlCenter"
+
+[widget.clock]
+format = "{:%H:%M  %a %d %b}"
+
+[widget.workspaces]
+# Only show a tag once it has a window on it (or is the active tag); matches
+# v4's decluttered look instead of always drawing all 9 mango tags.
+hide_when_empty = true
+labels_only_when_occupied = true # showLabelsOnlyWhenOccupied

@@ -15,6 +15,7 @@ in
     theming.enable       = toggle "GTK theme, icon theme, cursor and dconf colour scheme.";
     alacritty.enable     = toggle "Alacritty dotfiles.";
     rofi.enable          = toggle "rofi dotfiles.";
+    noctalia.enable      = toggle "noctalia-shell config.toml and custom palettes.";
     mpv.enable           = toggle "mpv, with the ani-skip script.";
     easyeffects.enable   = toggle "EasyEffects audio processing.";
     activitywatch.enable = toggle "ActivityWatch time tracking (aw-server + awatcher).";
