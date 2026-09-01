@@ -40,11 +40,42 @@ in
       # command name, so mango's and niri's dotfiles (keybinds, autostart)
       # keep calling `noctalia-shell` unmodified. Tracks whatever nixpkgs
       # currently packages as `noctalia`, including its eventual stable release.
+      #
+      # v5 dropped the v4 `ipc call <target> <action>` vocabulary for `msg
+      # <command>` (see `noctalia msg --help`). keybinds.conf/keybinds.kdl still
+      # spawn the v4 form, so this shim translates each call site used there
+      # into its v5 equivalent instead of editing those dotfiles, which are
+      # shared with hosts still on v4.
       nixpkgs.overlays = [
         (final: prev: {
-          noctalia-shell = final.runCommand "noctalia-shell-5.0.0" { } ''
-            mkdir -p $out/bin
-            ln -s ${final.noctalia}/bin/noctalia $out/bin/noctalia-shell
+          noctalia-shell = final.writeShellScriptBin "noctalia-shell" ''
+            bin=${final.noctalia}/bin/noctalia
+
+            if [ "$1" = "ipc" ] && [ "$2" = "call" ]; then
+              shift 2
+              case "$1 $2" in
+                "launcher toggle")     exec "$bin" msg panel-toggle launcher ;;
+                "lockScreen lock")     exec "$bin" msg session lock ;;
+                "sessionMenu toggle")  exec "$bin" msg panel-toggle session ;;
+                "launcher clipboard")  exec "$bin" msg panel-toggle clipboard ;;
+                "volume increase")     exec "$bin" msg volume-up ;;
+                "volume decrease")     exec "$bin" msg volume-down ;;
+                "volume muteOutput")   exec "$bin" msg volume-mute ;;
+                "volume muteInput")    exec "$bin" msg mic-mute ;;
+                "media next")          exec "$bin" msg media next ;;
+                "media previous")      exec "$bin" msg media previous ;;
+                "media playPause")     exec "$bin" msg media toggle ;;
+                "brightness increase") exec "$bin" msg brightness-up ;;
+                "brightness decrease") exec "$bin" msg brightness-down ;;
+                "monitors off")        exec "$bin" msg dpms-off ;;
+                *)
+                  echo "noctalia-shell compat shim: no v5 mapping for 'ipc call $1 $2'" >&2
+                  exit 1
+                  ;;
+              esac
+            fi
+
+            exec "$bin" "$@"
           '';
         })
       ];
