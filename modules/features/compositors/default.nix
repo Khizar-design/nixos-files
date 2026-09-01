@@ -54,6 +54,15 @@ in
 
     environment.sessionVariables = {
       ELECTRON_OZONE_PLATFORM_HINT = "auto";
+      # The de facto NixOS convention: most nixpkgs-packaged Electron apps
+      # (equibop, discord, teams-for-linux, slack, ...) wrap their binary with
+      # a check for exactly this var — when set, they switch on native
+      # Wayland (ozone-platform) instead of falling back to XWayland, which is
+      # also what makes their WebRTC screen-share use a live PipeWire stream
+      # instead of a single static frame grabbed through X11. Applies to any
+      # future Electron app installed from nixpkgs too, no per-package wrapper
+      # needed.
+      NIXOS_OZONE_WL = "1";
       QT_QPA_PLATFORM = "wayland";
       QT_QPA_PLATFORMTHEME = "gtk3";
       QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
