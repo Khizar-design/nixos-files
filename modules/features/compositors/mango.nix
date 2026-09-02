@@ -7,19 +7,9 @@ let
     default = [ "gtk" ];
     "org.freedesktop.impl.portal.ScreenCast" = [ "wlr" ];
     "org.freedesktop.impl.portal.Screenshot" = [ "wlr" ];
-    # wlr has no Inhibit implementation
     "org.freedesktop.impl.portal.Inhibit" = [ "gtk" ];
   };
 
-  # mango is wlroots-based and wlr_backend_autocreate picks its backend by
-  # sniffing the environment. niri.nix sets DISPLAY=":0" system-wide for
-  # xwayland-satellite, and pam_env hands it to every session — so mango would
-  # see DISPLAY, choose the X11 backend, find no X server and exit. Strip it and
-  # pin the backend, the same fix noctalia-greeter needs.
-  #
-  # This wraps both the login entry and the `mango-session` command, so it holds
-  # whether the session comes from greetd or from the greeter's picker. Running
-  # bare `mango` from a tty is unaffected.
   mango-session = pkgs.runCommand "mango-session"
     {
       passthru.providedSessions = [ "mango" ];
