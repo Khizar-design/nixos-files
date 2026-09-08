@@ -1,5 +1,5 @@
 {
-  description = "NixOS with niri + noctalia";
+  description = "NixOS with niri/mangowm + noctalia";
   
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -22,6 +22,11 @@
     zen-browser = {
       url = "github:youwen5/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    brave-origin = {
+      url = "github:Daniel-42-z/brave-origin-flake";
+      input.nixpkgs.follows = "nixpkgs";
     };
 
     nix-flatpak.url = "github:gmodena/nix-flatpak";

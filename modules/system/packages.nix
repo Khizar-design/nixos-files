@@ -13,7 +13,7 @@ in
   options.khizar.packages = {
     core.enable        = group "core" "Base CLI tooling";
     desktop.enable     = group "desktop" "Wayland desktop bits: shell, launcher, file manager, clipboard";
-    browser.enable     = group "browser" "Zen Browser";
+    browser.enable     = group "browser" "Zen Browser, Brave Origin";
     dev.enable         = group "dev" "Editors, IDEs, Node/Python toolchains";
     media.enable       = group "media" "Players, OBS, anime/podcast CLIs";
     office.enable      = group "office" "LibreOffice, Obsidian, Slack, Teams";
@@ -35,17 +35,6 @@ in
       programs.zsh.enable = true;
       environment.systemPackages = cfg.extra;
 
-      # noctalia 5.0.0 (nixpkgs' `noctalia`, currently 5.0.0-betaX, fetched
-      # prebuilt from cache.nixos.org) wrapped under the old `noctalia-shell`
-      # command name, so mango's and niri's dotfiles (keybinds, autostart)
-      # keep calling `noctalia-shell` unmodified. Tracks whatever nixpkgs
-      # currently packages as `noctalia`, including its eventual stable release.
-      #
-      # v5 dropped the v4 `ipc call <target> <action>` vocabulary for `msg
-      # <command>` (see `noctalia msg --help`). keybinds.conf/keybinds.kdl still
-      # spawn the v4 form, so this shim translates each call site used there
-      # into its v5 equivalent instead of editing those dotfiles, which are
-      # shared with hosts still on v4.
       nixpkgs.overlays = [
         (final: prev: {
           noctalia-shell = final.writeShellScriptBin "noctalia-shell" ''
@@ -120,6 +109,7 @@ in
     (lib.mkIf cfg.browser.enable {
       environment.systemPackages = [
         inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
+	inputs.brave-origin.packages.${pkgs.stdenv.hostPlatform.system}.default
       ];
     })
 
