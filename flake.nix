@@ -24,8 +24,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    brave-origin = {
-      url = "github:Daniel-42-z/brave-origin-flake";
+    helium = {
+      url = "github:AlvaroParker/helium-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nix-flatpak.url = "github:gmodena/nix-flatpak";
