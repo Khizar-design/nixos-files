@@ -24,11 +24,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    helium = {
-      url = "github:AlvaroParker/helium-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nix-flatpak.url = "github:gmodena/nix-flatpak";
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";

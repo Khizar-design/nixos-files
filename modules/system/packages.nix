@@ -13,7 +13,7 @@ in
   options.khizar.packages = {
     core.enable        = group "core" "Base CLI tooling";
     desktop.enable     = group "desktop" "Wayland desktop bits: shell, launcher, file manager, clipboard";
-    browser.enable     = group "browser" "Zen Browser, Helium";
+    browser.enable     = group "browser" "Zen Browser";
     dev.enable         = group "dev" "Editors, IDEs, Node/Python toolchains";
     media.enable       = group "media" "Players, OBS, anime/podcast CLIs";
     office.enable      = group "office" "LibreOffice, Obsidian, Slack, Teams";
@@ -109,7 +109,6 @@ in
     (lib.mkIf cfg.browser.enable {
       environment.systemPackages = [
         inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
-	inputs.helium.packages.${pkgs.stdenv.hostPlatform.system}.default
       ];
     })
 
