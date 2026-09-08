@@ -67,6 +67,18 @@ in
             exec "$bin" "$@"
           '';
         })
+
+        (final: prev: {
+          ani-cli = prev.ani-cli.overrideAttrs (old: {
+            version = "5.1.0-hianime";
+            src = final.fetchFromGitHub {
+              owner = "U-L-M-S";
+              repo = "ani-cli";
+              rev = "1e13b7666649b6a254c011fcb4916f78b7a55bf6";
+              hash = "sha256-ViZ0WAoDRkj9C3TUp1S0va8cTmxRzFsdzu4fN34Jst0=";
+            };
+          });
+        })
       ];
     }
 
