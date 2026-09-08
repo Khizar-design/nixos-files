@@ -77,6 +77,7 @@ in
               rev = "1e13b7666649b6a254c011fcb4916f78b7a55bf6";
               hash = "sha256-ViZ0WAoDRkj9C3TUp1S0va8cTmxRzFsdzu4fN34Jst0=";
             };
+	    postPatch = (old.postPatch or "") + ''sed -i 's/data-server-name="HD-1"/data-server-name="ZokoAnime"/' ani-cli'';
           });
         })
       ];
