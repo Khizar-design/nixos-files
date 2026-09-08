@@ -26,7 +26,7 @@
 
     brave-origin = {
       url = "github:Daniel-42-z/brave-origin-flake";
-      input.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nix-flatpak.url = "github:gmodena/nix-flatpak";
