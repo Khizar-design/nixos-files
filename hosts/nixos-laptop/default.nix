@@ -18,6 +18,7 @@
     laptop.enable = true;
     sunshine.enable = true;
     noctaliaGreeter.enable = true;
+    openlogi.enable = true;
   };
 
   services.blueferry.enable = true;
