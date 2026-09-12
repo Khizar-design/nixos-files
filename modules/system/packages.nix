@@ -156,12 +156,6 @@ in
         libreoffice-stable
         obsidian
         teams-for-linux
-        (slack.overrideAttrs (old: {
-          installPhase = old.installPhase + ''
-            wrapProgram $out/bin/slack \
-              --add-flags "--enable-features=WebRTCPipeWireCapturer"
-          '';
-        }))
       ];
     })
 
@@ -197,11 +191,9 @@ in
     })
 
     (lib.mkIf cfg.security.enable {
-      # Installs wireshark, creates the 'wireshark' group, and sets up a setcap
-      # wrapper for dumpcap so group members can capture without root.
       programs.wireshark = {
         enable = true;
-        package = pkgs.wireshark; # default is wireshark-cli (no GUI)
+        package = pkgs.wireshark;
       };
     })
   ];
