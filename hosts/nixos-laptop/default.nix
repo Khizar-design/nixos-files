@@ -23,6 +23,10 @@
 
   services.blueferry.enable = true;
 
+  # ── Hardware ───────────────────────────────────────────────────────────────
+  # linux-firmware 20260910 broke the Radeon 680M's DMCUB firmware.
+  khizar.hardware.rembrandtDmcubPin.enable = true;
+
   khizar.packages.extra = with pkgs; [
     discord
   ];
