@@ -20,7 +20,7 @@ in
     lib.mkEnableOption "the interactive noctalia-greeter login screen";
 
   config = lib.mkIf config.khizar.features.noctaliaGreeter.enable {
-    programs.noctalia-greeter = {
+    services.displayManager.noctalia-greeter = {
       enable = true;
 
       # Full declarative greeter.toml (overwritten on each activation).
@@ -96,7 +96,7 @@ in
     # the greeter always talks to DRM directly.
     services.greetd.settings.default_session.command = lib.mkForce (
       "${pkgs.coreutils}/bin/env -u DISPLAY WLR_BACKENDS=drm,libinput "
-      + "${config.programs.noctalia-greeter.package}/bin/noctalia-greeter-session"
+      + "${config.services.displayManager.noctalia-greeter.package}/bin/noctalia-greeter-session"
     );
   };
 }
