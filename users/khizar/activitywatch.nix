@@ -1,7 +1,7 @@
 { lib, pkgs, osConfig, ... }:
 
 let
-  # awatcher config: rewrite zen-browser's Wayland app-id ("zen") to "Firefox".
+  # awatcher config: rewrite zen-browser's Wayland app-id ("zen-beta") to "Firefox".
   # ActivityWatch's "Activity -> Browser" view only correlates web-watcher tab
   # data with periods where the focused window is a *recognised* browser, and
   # its built-in list knows "firefox"/"chromium" but not "zen". Since zen is
@@ -9,7 +9,7 @@ let
   # per-tab URLs appear only in the Timeline, not the Browser view.
   awatcherConfig = pkgs.writeText "awatcher-config.toml" ''
     [[awatcher.filters]]
-    match-app-id = "zen"
+    match-app-id = "zen-beta"
     replace-app-id = "Firefox"
   '';
 in
