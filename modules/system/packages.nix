@@ -16,7 +16,7 @@ in
     browser.enable     = group "browser" "Zen Browser and Brave Origin";
     dev.enable         = group "dev" "Editors, IDEs, Node/Python toolchains";
     media.enable       = group "media" "Players, OBS, anime/podcast CLIs";
-    office.enable      = group "office" "LibreOffice, Obsidian, Slack, Teams";
+    office.enable      = group "office" "LibreOffice, Obsidian, Protonmail, Teams";
     ai.enable          = group "ai" "LM Studio and Claude Code";
     appearance.enable  = group "appearance" "GTK theme and cursor packages";
     fonts.enable       = group "fonts" "System font set";
@@ -156,6 +156,7 @@ in
         libreoffice-stable
         obsidian
         teams-for-linux
+        protonmail-desktop
       ];
     })
 
