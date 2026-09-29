@@ -18,3 +18,5 @@ systemctl --user start mango-session.target
 XDG_CURRENT_DESKTOP=wlroots noctalia-shell &
 
 wl-paste --watch cliphist store &
+# No side monitor here, so every Zen window goes to tag 2 (see zen-placer.sh).
+mango-zen-placer &

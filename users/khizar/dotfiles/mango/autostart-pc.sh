@@ -16,3 +16,5 @@ XDG_CURRENT_DESKTOP=wlroots noctalia-shell &
 
 wl-paste --watch cliphist store &
 equibop &
+proton-mail &
+mango-zen-placer DP-1 &

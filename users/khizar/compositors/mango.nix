@@ -27,6 +27,13 @@ let
     "rules.conf" = ../dotfiles/mango/cfg/rules.conf;
   } // { "monitor.conf" = monitorConfig; };
 
+  # Started from autostart-*.sh; see the header of zen-placer.sh.
+  zenPlacer = pkgs.writeShellApplication {
+    name = "mango-zen-placer";
+    runtimeInputs = [ pkgs.jq pkgs.mango ];
+    text = builtins.readFile ../dotfiles/mango/zen-placer.sh;
+  };
+
   # `mango -c FILE -p` parse-checks a config without starting a compositor, so
   # a typo fails the rebuild instead of the next login. It resolves "./" includes
   # against FILE's directory, hence the staging dir — every ./cfg/*.conf the
@@ -44,6 +51,8 @@ let
 in
 {
   config = lib.mkIf osConfig.khizar.desktop.mango.enable {
+    home.packages = [ zenPlacer ];
+
     xdg.configFile = {
       "mango/config.conf".source = checkedConfig;
       "mango/autostart.sh" = {
