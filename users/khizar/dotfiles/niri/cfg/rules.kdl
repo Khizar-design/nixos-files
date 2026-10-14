@@ -1,50 +1,74 @@
+    // Kept in step with mango/cfg/rules.conf. Workspace names are declared
+    // per host in cfg/display.kdl; a rule naming one the host lacks (chat/mail
+    // on the laptop) just opens the window normally.
+
     window-rule {
-        geometry-corner-radius 5 // Set every window radius to 20
+        geometry-corner-radius 5 // Set every window radius to 5
         clip-to-geometry true
     }
 
     window-rule {
-        match app-id="Alacritty"
+        match app-id="^Alacritty$"
         draw-border-with-background false
     }
 
+    // Full column width. No open-on-workspace: which workspace it gets depends
+    // on the monitor it opened on, so niri-zen-placer (autostart) moves it.
     window-rule {
-        match app-id="zen"
-        open-on-workspace "net"
+        match app-id="^zen-beta$"
         default-column-width { proportion 1.0; }
     }
 
     window-rule {
-        match app-id="md.obsidian.Obsidian"
+        match app-id="^md\\.obsidian\\.Obsidian$"
         open-on-workspace "notes"
         open-fullscreen true
     }
 
     window-rule {
-        match app-id="teams-for-linux"
+        match app-id="^teams-for-linux$"
         open-fullscreen true
     }
 
+    // PC only: DP-1's first workspace. Full column width, not real fullscreen,
+    // so the bar and focus ring stay visible.
     window-rule {
-	match app-id="equibop"
-	open-fullscreen true
-	open-on-output "DP-1"
+        match app-id="^equibop$"
+        open-on-workspace "chat"
+        default-column-width { proportion 1.0; }
     }
 
-     // if you use steam you will probably like these
+    // PC only: parked on DP-1's second workspace without pulling focus there.
     window-rule {
-        match app-id="steam"
+        match app-id="^proton-mail$"
+        open-on-workspace "mail"
+        open-focused false
+    }
+
+    // Noctalia's settings window (recommended by noctalia's niri docs).
+    window-rule {
+        match app-id="^dev\\.noctalia\\.Noctalia$"
+        open-floating true
+        default-column-width { fixed 1080; }
+        default-window-height { fixed 920; }
+    }
+
+    // steam: floating except the main window
+    window-rule {
+        match app-id="^steam$"
         exclude title=r#"^[Ss]team$"#
         open-floating true
     }
 
     window-rule {
-       match app-id="steam" title=r#"^notificationtoasts_\d+_desktop$"#
+       match app-id="^steam$" title=r#"^notificationtoasts_\d+_desktop$"#
        default-floating-position x=10 y=10 relative-to="bottom-right"
        open-focused false
     }
 
+    // Stationary wallpaper (noctalia niri docs, option 2). Needs
+    // layout.background-color "transparent" and noctalia's [backdrop] off.
     layer-rule {
-        match namespace="^noctalia-wallpaper*"
+        match namespace="^noctalia-wallpaper"
         place-within-backdrop true
     }

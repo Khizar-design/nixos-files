@@ -1,8 +1,5 @@
-prefer-no-csd
-
-workspace "main"
-workspace "net"
-workspace "notes"
+// Named workspaces are per-host (they pin to outputs), so they live in
+// cfg/display.kdl rather than here.
 
 include "./cfg/animation.kdl"
 include "./cfg/autostart.kdl"

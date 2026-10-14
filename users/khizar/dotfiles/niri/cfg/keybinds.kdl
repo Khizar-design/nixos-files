@@ -12,8 +12,8 @@ binds {
     Mod+Return                          hotkey-overlay-title="Open Terminal: Alacritty" { spawn "alacritty"; }
     Mod+D				hotkey-overlay-title="Launcher: noctalia" { spawn-sh "noctalia-shell ipc call launcher toggle"; }
     Mod+Shift+D                         hotkey-overlay-title="Run an Application: rofi (test fallback)" { spawn "rofi" "-show" "drun"; }
-    Mod+B                               hotkey-overlay-title="Open Browser: Zen Browser" { spawn "zen"; }
-    Mod+N                               hotkey-overlay-title="Open Notes: Obsidian" { spawn "sh" "-c" "niri msg action focus-workspace 3; exec obsidian"; }
+    Mod+B                               hotkey-overlay-title="Open Browser: default (Zen)" { spawn "xdg-open" "http://"; }
+    Mod+N                               hotkey-overlay-title="Open Notes: Obsidian" { spawn-sh "niri msg action focus-workspace notes; exec obsidian"; }
     Mod+ALT+L                           hotkey-overlay-title="Lock Screen: noctalia lock" { spawn-sh "noctalia-shell ipc call lockScreen lock"; }
     Mod+Shift+Q                        hotkey-overlay-title="Session Menu: noctalia sessionMenu" { spawn-sh "noctalia-shell ipc call sessionMenu toggle"; }
 
@@ -29,7 +29,6 @@ binds {
     XF86AudioNext                       allow-when-locked=true { spawn-sh "noctalia-shell ipc call media next"; }
     XF86AudioPrev                       allow-when-locked=true { spawn-sh "noctalia-shell ipc call media previous"; }
     XF86AudioPlay                       allow-when-locked=true { spawn-sh "noctalia-shell ipc call media playPause"; }
-    XF86AudioPause                      allow-when-locked=true { spawn-sh "noctalia-shell ipc call media playPause"; }
 
     // ─── Brightness Controls ───
     XF86MonBrightnessUp                 allow-when-locked=true { spawn-sh "noctalia-shell ipc call brightness increase"; }
@@ -87,11 +86,13 @@ binds {
     Mod+TAB                             { focus-workspace-previous; }
 
     // ─── Layout Controls ───
-    Mod+CTRL+F                          { expand-column-to-available-width; }
+    Mod+CTRL+F                          { maximize-window-to-edges; }
     Mod+C                               { center-column; }
     Mod+CTRL+C                          { center-visible-columns; }
     Mod+Minus                           { set-column-width "-10%"; }
     Mod+Equal                           { set-column-width "+10%"; }
+    Mod+R                               { set-column-width "100%"; }
+    Mod+Shift+R                         { switch-preset-column-width; }
     Mod+Shift+Minus                     { set-window-height "-10%"; }
     Mod+Shift+Equal                     { set-window-height "+10%"; }
 

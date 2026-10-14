@@ -12,21 +12,13 @@ in
       "org.freedesktop.impl.portal.Camera" = [ "gtk" ];
     };
 
-    # xwayland-satellite owns :0, and everything launched under niri has to know
-    # where to find it. mango has XWayland built in and is wrapped so it never
-    # sees this — see mango.nix.
-    environment.sessionVariables.DISPLAY = ":0";
-
-    systemd.user.services.xwayland-satellite = {
-      description = "Xwayland outside the Wayland sandbox";
-      wantedBy = [ "graphical-session.target" ];
-      partOf = [ "graphical-session.target" ];
-      after = [ "graphical-session.target" ];
-      serviceConfig = {
-        ExecStart = "${pkgs.xwayland-satellite}/bin/xwayland-satellite :0";
-        Restart = "on-failure";
-      };
-    };
+    # No xwayland-satellite unit and no global DISPLAY: niri (>= 25.08) creates
+    # the X11 socket itself, sets DISPLAY for everything it spawns, and starts
+    # xwayland-satellite (from PATH, see packages.nix) on the first X11 client.
+    # A separate unit pinned to :0 raced niri for that socket: whichever lost
+    # either restart-looped or pushed niri onto :1, splitting apps between two
+    # X servers. niri also strips an inherited DISPLAY at startup, so the old
+    # sessionVariables entry never reached its children anyway.
 
     services.greetd.settings.default_session.command =
       lib.mkIf (cfg.default == "niri") (lib.mkDefault "${pkgs.niri}/bin/niri-session");

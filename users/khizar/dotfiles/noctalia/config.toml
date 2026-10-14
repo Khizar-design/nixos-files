@@ -85,8 +85,10 @@ timeout = 660                   # idle.lockTimeout (idle itself stays disabled, 
 timeout = 600                   # idle.screenOffTimeout
 
 [backdrop]
-# general.enableBlurBehind was true
-enabled = true
+# general.enableBlurBehind was true. Backdrop is niri-only (mango ignores it),
+# and niri/cfg/rules.kdl uses the stationary-wallpaper setup, which noctalia's
+# niri docs say needs this off — left on, the blurred backdrop covers the wallpaper.
+enabled = false
 
 [bar.main]
 position = "top"                # bar.position

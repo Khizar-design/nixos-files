@@ -1,7 +1,9 @@
 // ────────────── Startup Applications ──────────────
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Miscellaneous#spawn-sh-at-startup
+// Mirrors mango/autostart-laptop.sh. No xwayland-satellite here: niri spawns
+// it on demand and sets DISPLAY itself.
 
     spawn-at-startup "noctalia-shell"
-    spawn-at-startup "xwayland-satellite"
     spawn-at-startup "wl-paste" "--watch" "cliphist" "store"
-
+    // No side monitor here, so every Zen window goes to "net" (see zen-placer.sh).
+    spawn-at-startup "niri-zen-placer"

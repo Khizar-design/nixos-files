@@ -112,7 +112,7 @@ in
         tumbler
         swaybg
         wlsunset
-        xwayland-satellite
+        xwayland-satellite # niri looks it up in PATH and spawns it on demand
         wl-clipboard
         cliphist
         # niri had screenshots built in; mango does not.

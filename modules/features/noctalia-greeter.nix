@@ -88,8 +88,9 @@ in
       };
     };
 
-    # environment.sessionVariables sets DISPLAY=":0" for xwayland-satellite, and
-    # pam_env hands it to every PAM session — including greetd's. wlroots picks its
+    # environment.sessionVariables used to set DISPLAY=":0" for xwayland-satellite
+    # (no longer — see compositors/niri.nix), and pam_env hands those to every PAM
+    # session — including greetd's. Kept as a guard. wlroots picks its
     # backend by sniffing the environment, so it sees DISPLAY, chooses X11, finds no
     # X server at the login screen and exits; greetd then restart-loops until it hits
     # start-limit-hit, leaving a black screen. Strip DISPLAY and pin the backend so
