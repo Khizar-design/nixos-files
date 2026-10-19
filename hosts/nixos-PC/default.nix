@@ -10,7 +10,7 @@
   # Both installed; with niri enabled khizar.desktop.default resolves to niri,
   # so it is what greetd/the greeter start. mango stays as a fallback session.
   khizar.desktop = {
-    niri.enable = true;
+    niri.enable = false;
     mango.enable = true;
   };
 
