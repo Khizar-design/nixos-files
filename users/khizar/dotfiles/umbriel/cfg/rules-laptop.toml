@@ -1,10 +1,14 @@
 # From niri cfg/rules.kdl, minus the PC-only equibop and proton-mail rules.
 # Later rules override earlier ones. Rounded corners are in appearance.toml.
 
-# Full column width. No default_workspace, to match the PC setup: umbriel-zen-placer
-# (autostart) moves it.
+# Fills the screen in every layout, on any workspace. default_scrolling_extent alone
+# can't: it only applies if the window opens on a scrolling workspace, and
+# umbriel-zen-placer (autostart) moves Zen after it opens. default_maximize can't
+# either: master caps a full-width column at 0.9. No default_workspace, to match the
+# PC setup. Mod+Ctrl+F leaves the maximize, back to the width below.
 [[window_rule]]
 match.app_id = "^zen-beta$"
+default_maximize_to_edges = true
 default_scrolling_extent = 1.0
 
 [[window_rule]]
