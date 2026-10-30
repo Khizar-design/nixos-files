@@ -1,0 +1,123 @@
+# From mango cfg/keybinds.conf. Mod is Super. This table replaces umbriel's built-in
+# binds entirely. SUPER+left/right mouse drag move and resize windows are built in
+# and need no bind here.
+#
+# Unlike mango, binds repeat while held by default, so one-shot actions and anything
+# that opens a window set repeat = false.
+
+[keybinds]
+
+# ─── Applications ───
+"Mod+Return" = { action = "spawn alacritty", repeat = false }
+"Mod+D" = { action = "spawn noctalia-shell msg panel-toggle launcher", repeat = false }
+"Mod+Shift+D" = { action = "spawn rofi -show drun", repeat = false }
+"Mod+B" = { action = "spawn xdg-open http://", repeat = false }
+"Mod+N" = { action = "spawn obsidian", repeat = false }
+"Mod+Alt+L" = { action = "spawn noctalia-shell msg session lock", repeat = false }
+"Mod+Shift+Q" = { action = "spawn noctalia-shell msg panel-toggle session", repeat = false }
+"Mod+E" = { action = "spawn thunar", repeat = false }
+"Mod+V" = { action = "spawn noctalia-shell msg panel-toggle clipboard", repeat = false }
+"Mod+Shift+V" = { action = "spawn cliphist list | rofi -dmenu | cliphist decode | wl-copy", repeat = false }
+
+# ─── Media Controls ───
+"XF86AudioRaiseVolume" = { action = "spawn noctalia-shell msg volume-up", allow_when_locked = true }
+"XF86AudioLowerVolume" = { action = "spawn noctalia-shell msg volume-down", allow_when_locked = true }
+"XF86AudioMute" = { action = "spawn noctalia-shell msg volume-mute", allow_when_locked = true, repeat = false }
+"XF86AudioMicMute" = { action = "spawn noctalia-shell msg mic-mute", allow_when_locked = true, repeat = false }
+"XF86AudioNext" = { action = "spawn noctalia-shell msg media next", allow_when_locked = true }
+"XF86AudioPrev" = { action = "spawn noctalia-shell msg media previous", allow_when_locked = true }
+"XF86AudioPlay" = { action = "spawn noctalia-shell msg media toggle", allow_when_locked = true, repeat = false }
+
+# ─── Brightness Controls ───
+"XF86MonBrightnessUp" = { action = "spawn noctalia-shell msg brightness-up", allow_when_locked = true }
+"XF86MonBrightnessDown" = { action = "spawn noctalia-shell msg brightness-down", allow_when_locked = true }
+
+# ─── Window Movement and Focus ───
+"Mod+Q" = { action = "window-close", repeat = false }
+
+"Mod+H" = "window-focus-left"
+"Mod+L" = "window-focus-right"
+"Mod+K" = "window-focus-up"
+"Mod+J" = "window-focus-down"
+
+"Mod+Ctrl+H" = "window-swap-left"
+"Mod+Ctrl+L" = "window-swap-right"
+"Mod+Ctrl+K" = "window-swap-up"
+"Mod+Ctrl+J" = "window-swap-down"
+
+"Mod+Shift+H" = "output-focus-left"
+"Mod+Shift+L" = "output-focus-right"
+"Mod+Shift+K" = "output-focus-up"
+"Mod+Shift+J" = "output-focus-down"
+
+"Mod+Shift+Ctrl+H" = "window-move-to-output-left"
+"Mod+Shift+Ctrl+L" = "window-move-to-output-right"
+"Mod+Shift+Ctrl+K" = "window-move-to-output-up"
+"Mod+Shift+Ctrl+J" = "window-move-to-output-down"
+
+# ─── Workspace Switching (mango tags → umbriel workspaces, also per-output) ───
+"Mod+1" = "workspace-switch 1"
+"Mod+2" = "workspace-switch 2"
+"Mod+3" = "workspace-switch 3"
+"Mod+4" = "workspace-switch 4"
+"Mod+5" = "workspace-switch 5"
+"Mod+6" = "workspace-switch 6"
+"Mod+7" = "workspace-switch 7"
+"Mod+8" = "workspace-switch 8"
+"Mod+9" = "workspace-switch 9"
+
+"Mod+Shift+1" = "window-move-to-workspace 1"
+"Mod+Shift+2" = "window-move-to-workspace 2"
+"Mod+Shift+3" = "window-move-to-workspace 3"
+"Mod+Shift+4" = "window-move-to-workspace 4"
+"Mod+Shift+5" = "window-move-to-workspace 5"
+"Mod+Shift+6" = "window-move-to-workspace 6"
+"Mod+Shift+7" = "window-move-to-workspace 7"
+"Mod+Shift+8" = "window-move-to-workspace 8"
+"Mod+Shift+9" = "window-move-to-workspace 9"
+
+# focus-workspace-previous
+"Mod+Tab" = { action = "workspace-focus-last", repeat = false }
+
+# ─── Layout Controls ───
+"Mod+Ctrl+F" = { action = "window-toggle-maximize-to-edges", repeat = false }
+# Promote to master / center the column; see zoom.sh.
+"Mod+C" = { action = "spawn umbriel-zoom", repeat = false }
+# Column width in scrolling, master width in master (mango's did nothing in tile).
+"Mod+minus" = "window-modify-primary-extent -0.1"
+"Mod+equal" = "window-modify-primary-extent 0.1"
+# Full width, and cycle extent_presets. Master caps at 0.9.
+"Mod+R" = { action = "window-set-primary-extent 1.0", repeat = false }
+"Mod+Shift+R" = { action = "window-cycle-primary-extent", repeat = false }
+# Height. mango's 50px is 0.05 of these 1080p screens.
+"Mod+Shift+minus" = "window-modify-secondary-extent -0.05"
+"Mod+Shift+equal" = "window-modify-secondary-extent 0.05"
+
+# ─── Modes ───
+"Mod+T" = { action = "window-toggle-floating", repeat = false }
+"Mod+F" = { action = "window-toggle-fullscreen", repeat = false }
+"Mod+W" = { action = "workspace-set-layout master", repeat = false }
+"Mod+Shift+W" = { action = "workspace-set-layout scrolling", repeat = false }
+"Mod+O" = { action = "overview-toggle", repeat = false }
+
+# Jump straight to one of umbriel's four layouts.
+"Mod+F1" = { action = "workspace-set-layout master", repeat = false }
+"Mod+F2" = { action = "workspace-set-layout scrolling", repeat = false }
+"Mod+F3" = { action = "workspace-set-layout dwindle", repeat = false }
+"Mod+F4" = { action = "workspace-set-layout stacking", repeat = false }
+
+# ─── Screenshots ───
+"Ctrl+Shift+1" = { action = "spawn grim -g \"$(slurp)\" - | wl-copy", repeat = false }
+"Ctrl+Shift+2" = { action = "spawn grim ~/Pictures/Screenshots/$(date +%Y-%m-%dT%H:%M:%S).png", repeat = false }
+"Ctrl+Shift+3" = { action = "spawn grim -g \"$(slurp)\" ~/Pictures/Screenshots/$(date +%Y-%m-%dT%H:%M:%S).png", repeat = false }
+
+# ─── Exit / Power ───
+"Ctrl+Alt+Delete" = { action = "session-quit skip-confirmation", repeat = false }
+"Mod+Shift+P" = { action = "dpms-off", repeat = false }
+
+# Gets you out of a VM or remote desktop that grabbed the keyboard. mango has no
+# equivalent bind; umbriel's docs say to always keep one.
+"Mod+Shift+Escape" = { action = "shortcuts-inhibit-toggle", allow_when_inhibited = true, repeat = false }
+
+# ─── Config ───
+"Mod+Ctrl+R" = { action = "config-reload", repeat = false }

@@ -1,0 +1,29 @@
+# From niri cfg/display-laptop.kdl.
+[output.eDP-1]
+mode = "1920x1200@60.001"
+position = [0, 0]
+scale = 1.2
+focus_at_startup = true
+
+# Dummy HDMI plug — streamed to iPad Pro 13" (2024) via Sunshine/Moonlight.
+# x must equal eDP-1's logical width (1920 / 1.2 = 1600) so the outputs touch.
+# 1.75 makes text on the iPad the same physical size as on the laptop panel;
+# Sunshine still captures the full 2560x1600.
+[output.HDMI-A-1]
+mode = "2560x1600@59.972"
+position = [1600, 0]
+scale = 1.75
+
+# Named workspaces on a dynamic output, as in niri: these three always exist, in
+# this order, so Mod+1/2/3 = main/net/notes, and unnamed ones come and go after them.
+[[workspace]]
+name = "main"
+output = "eDP-1"
+
+[[workspace]]
+name = "net"
+output = "eDP-1"
+
+[[workspace]]
+name = "notes"
+output = "eDP-1"

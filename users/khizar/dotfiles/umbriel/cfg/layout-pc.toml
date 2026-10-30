@@ -1,0 +1,23 @@
+# From mango cfg/layout.conf. tile, the layout of every tag there, is umbriel's
+# master; scroller is scrolling. `layout.mode` is the default for every workspace;
+# switch one at runtime with the SUPER+F1-F4 binds in keybinds-pc.toml.
+
+[layout]
+mode = "master"
+gap = 1
+extent_presets = [0.33333, 0.5, 0.66667]
+
+# new_is_master=1, default_master_factor=0.55
+[layout.master]
+default_width_fraction = 0.55
+new_becomes_master = true
+
+# scroller_default_proportion=0.5, scroller_focus_center=0, scroller_prefer_center=0.
+# scroller_default_proportion_single=1.0 is the is_alone rule in rules-pc.toml.
+[layout.scrolling]
+default_extent_fraction = 0.5
+center_focused = "never"
+center_underfull_strip = false
+
+[layout.dwindle]
+preserve_split = false

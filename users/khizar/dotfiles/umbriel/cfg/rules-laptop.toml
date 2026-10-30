@@ -1,0 +1,47 @@
+# From niri cfg/rules.kdl, minus the PC-only equibop and proton-mail rules.
+# Later rules override earlier ones. Rounded corners are in appearance.toml.
+
+# Full column width. No default_workspace, to match the PC setup: umbriel-zen-placer
+# (autostart) moves it.
+[[window_rule]]
+match.app_id = "^zen-beta$"
+default_scrolling_extent = 1.0
+
+[[window_rule]]
+match.app_id = "^md[.]obsidian[.]Obsidian$"
+default_output = "eDP-1"
+default_workspace = "notes"
+default_fullscreen = true
+
+[[window_rule]]
+match.app_id = "^teams-for-linux$"
+default_fullscreen = true
+
+# Noctalia's settings window.
+[[window_rule]]
+match.app_id = "^dev[.]noctalia[.]Noctalia$"
+default_floating = true
+default_floating_size_px = { width = 1080, height = 920 }
+
+# Screen-share picker, from umbriel's packaged config.
+[[window_rule]]
+match.app_id = "^dev[.]noctalia[.]UmbrielSharePicker$"
+default_floating = true
+default_floating_size_px = { width = 800, height = 600 }
+
+# steam: floating except the main window. Steam sets its title after mapping;
+# umbriel re-checks opening rules when that title arrives.
+[[window_rule]]
+match.app_id = "^steam$"
+default_floating = true
+
+[[window_rule]]
+match.app_id = "^steam$"
+match.title = "^[Ss]team$"
+default_floating = false
+
+[[window_rule]]
+match.app_id = "^steam$"
+match.title = "^notificationtoasts_[0-9]+_desktop$"
+default_position = { x = 10, y = 10, anchor = "bottom_right" }
+default_focused = false

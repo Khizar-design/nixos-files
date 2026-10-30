@@ -1,0 +1,30 @@
+# Options reference: https://docs.noctalia.dev/umbriel/
+# cfg/*-pc.toml is ported from the mango config, cfg/*-laptop.toml from the niri
+# config; compositors/umbriel.nix links each host's set in under these names.
+# Check edits with `umbriel config validate`.
+
+[include]
+files = [
+  "cfg/animation.toml",
+  "cfg/appearance.toml",
+  "cfg/autostart.toml",
+  "cfg/input.toml",
+  "cfg/keybinds.toml",
+  "cfg/layout.toml",
+  "cfg/monitor.toml",
+  "cfg/rules.toml",
+]
+
+# Noctalia's template apply.sh rewrites this file unless it already ends the list
+# with exactly this entry, and this file is a read-only symlink. Keep it. Only
+# exists once the Umbriel template is enabled in noctalia; it overrides the
+# colours in cfg/appearance.toml.
+[include.optional]
+files = ["noctalia.toml"]
+
+[general]
+mod_key = "Super"
+# hotkey-overlay skip-at-startup in niri; mango has no such overlay.
+show_cheatsheet = false
+# focus_on_activate=1 in mango; honor-xdg-activation-with-invalid-serial in niri.
+focus_on_activate = true

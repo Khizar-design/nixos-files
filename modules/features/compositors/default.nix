@@ -7,22 +7,27 @@ in
   imports = [
     ./niri.nix
     ./mango.nix
+    ./umbriel.nix
   ];
 
   options.khizar.desktop = {
     niri.enable = lib.mkEnableOption "the niri compositor session";
     mango.enable = lib.mkEnableOption "the mango compositor session";
+    umbriel.enable = lib.mkEnableOption "the umbriel compositor session";
 
     default = lib.mkOption {
-      type = lib.types.enum [ "niri" "mango" ];
-      default = if cfg.niri.enable then "niri" else "mango";
-      defaultText = lib.literalMD "whichever compositor is enabled; `niri` if both are";
+      type = lib.types.enum [ "niri" "mango" "umbriel" ];
+      default =
+        if cfg.niri.enable then "niri"
+        else if cfg.mango.enable then "mango"
+        else "umbriel";
+      defaultText = lib.literalMD "whichever compositor is enabled, preferring `niri`, then `mango`";
       description = ''
         Compositor greetd starts for the autologin session, and the entry
         noctalia-greeter preselects in its picker.
 
-        Only worth setting by hand when both compositors are enabled and you
-        want the other one; with a single compositor enabled this follows it.
+        Only worth setting by hand when several compositors are enabled and
+        you want a later one; with a single compositor enabled this follows it.
       '';
     };
   };
@@ -30,7 +35,7 @@ in
   config = {
     assertions = [
       {
-        assertion = cfg.niri.enable || cfg.mango.enable;
+        assertion = cfg.niri.enable || cfg.mango.enable || cfg.umbriel.enable;
         message = "khizar.desktop: enable at least one compositor.";
       }
       {
@@ -67,12 +72,12 @@ in
       QT_QPA_PLATFORMTHEME = "gtk3";
       QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
       XDG_SESSION_TYPE = "wayland";
-      # Both compositors setenv this for themselves; it is here for anything
+      # All compositors setenv this for themselves; it is here for anything
       # that reads it before the compositor starts.
       XDG_CURRENT_DESKTOP = cfg.default;
     };
 
-    # Neither niri nor mango ships a polkit agent, so authorization prompts fall
+    # None of the compositors ship a polkit agent, so authorization prompts fall
     # back to the tty agent — invisible to anything launched from a launcher.
     systemd.user.services.polkit-gnome-authentication-agent-1 = {
       description = "Graphical polkit authentication agent";

@@ -1,0 +1,16 @@
+# From niri cfg/layout.kdl.
+
+[layout]
+mode = "scrolling"
+gap = 1
+extent_presets = [0.33333, 0.5, 0.66667]
+
+# center-focused-column "never". No default-column-width in niri, so none here: each
+# application picks its own width. Niri keeps a short strip against the left edge.
+[layout.scrolling]
+center_focused = "never"
+center_underfull_strip = false
+
+# workspace-auto-back-and-forth
+[workspaces]
+back_and_forth = true

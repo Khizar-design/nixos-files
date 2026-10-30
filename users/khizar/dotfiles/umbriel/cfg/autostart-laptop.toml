@@ -1,0 +1,10 @@
+# From niri cfg/autostart-laptop.kdl. Xwayland is on demand and umbriel.service
+# brings up graphical-session.target itself.
+[general]
+autostart = [
+  "noctalia-shell",
+  "wl-paste --watch cliphist store",
+  # No side monitor here, so every Zen window goes to "net", position 2 on eDP-1
+  # (see zen-placer.sh).
+  "umbriel-zen-placer '' eDP-1",
+]

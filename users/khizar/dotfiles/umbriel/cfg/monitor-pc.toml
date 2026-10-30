@@ -1,0 +1,15 @@
+# From mango cfg/monitor-pc.conf. Microstep MAG 276CXF ×2, left to right.
+# A fixed 9, not umbriel's default dynamic list: mango's tag_num=9 means SUPER+7
+# always lands on workspace 7, where a dynamic output would clamp to the last one.
+[output.DP-2]
+mode = "1920x1080@280.003"
+position = [0, 0]
+scale = 1.0
+workspaces = 9
+focus_at_startup = true
+
+[output.DP-1]
+mode = "1920x1080@280.003"
+position = [1920, 0]
+scale = 1.0
+workspaces = 9

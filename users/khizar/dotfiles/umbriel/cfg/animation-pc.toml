@@ -1,0 +1,46 @@
+# From mango cfg/animation.conf. Umbriel's event defaults are springs, which ignore
+# duration_ms, so every event names mango's bezier explicitly.
+
+[animation]
+enabled = true
+duration_ms = 250
+curve = "0.25,1,0.5,1"
+
+# mango's "zoom" with fade: 0.4 to full size on open. umbriel's own "zoom" style has
+# no ratio; "popin" is the one that takes these and fades.
+[animation.windows_in]
+style = "popin"
+scale = 0.4
+duration_ms = 200
+curve = "0.25,1,0.5,1"
+
+[animation.windows_out]
+style = "popin"
+scale = 0.8
+duration_ms = 200
+curve = "0.25,1,0.5,1"
+
+[animation.windows_move]
+duration_ms = 250
+curve = "0.25,1,0.5,1"
+
+[animation.windows_resize]
+duration_ms = 250
+curve = "0.25,1,0.5,1"
+
+# tag_animation_direction=1: vertical, which is umbriel's default workspace_axis.
+[animation.workspaces]
+style = "slide"
+duration_ms = 250
+curve = "0.25,1,0.5,1"
+
+# animation_duration_focus=0
+[animation.border]
+enabled = false
+
+# layer_animations=1. All-or-nothing here: layer rules cannot animate one surface,
+# so mango's rofi-only zoom layer_rules have no direct port.
+[animation.layers]
+enabled = true
+duration_ms = 200
+curve = "0.25,1,0.5,1"

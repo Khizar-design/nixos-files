@@ -1,0 +1,29 @@
+# From niri cfg/input.kdl. Anything niri left at the libinput default is left out
+# here too, so the touchpad behaves the same.
+
+# No layout set: both use the system keymap.
+[input.keyboard]
+numlock_toggle = true
+
+[input.touchpad]
+tap = true
+natural_scroll = true
+scroll_factor = 1.0
+sensitivity = 0.0
+
+[input.mouse]
+accel_profile = "flat"
+sensitivity = 0.0
+
+[[input.device]]
+name = "TPPS/2 Elan TrackPoint"
+accel_profile = "flat"
+sensitivity = 0.0
+
+# focus-follows-mouse is commented out in niri.
+[input.focus]
+follows_mouse = false
+
+[input.cursor]
+theme = "capitaine-cursors"
+size = 24

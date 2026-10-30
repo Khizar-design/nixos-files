@@ -1,0 +1,24 @@
+# Shared: mango cfg/appearance.conf and niri cfg/layout.kdl + cfg/rules.kdl agree on
+# all of it, down to the border colours.
+
+# border_px, border_radius. Bars and client decorations stay as mango had them:
+# umbriel's title bar is off unless asked for.
+[appearance]
+border_width = 1
+corner_radius = 5
+
+# blur=0, shadows=0
+[appearance.blur]
+enabled = false
+
+[appearance.shadow]
+enabled = false
+
+# focus_color, border_color
+[colors.border]
+focused = "#5A7371FF"
+unfocused = "#505050FF"
+
+# drop_color
+[colors]
+insert_hint = "#8FBA7C55"

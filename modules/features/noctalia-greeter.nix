@@ -11,6 +11,7 @@ let
   sessionLabel = {
     niri = "Niri";
     mango = "Mango";
+    umbriel = "Umbriel";
   }.${config.khizar.desktop.default};
 in
 {

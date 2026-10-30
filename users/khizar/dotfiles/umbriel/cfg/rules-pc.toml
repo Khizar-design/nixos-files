@@ -1,0 +1,71 @@
+# From mango cfg/rules.conf. Later rules override earlier ones.
+# The per-tag layout rules are `layout.mode` in layout-pc.toml.
+
+# scroller_default_proportion_single=1.0: a lone window fills the scrolling strip,
+# and goes back to its own width when another joins it.
+[[window_rule]]
+match.is_alone = true
+default_scrolling_extent = 1.0
+
+# zen: full column width. No default_workspace — which workspace it gets depends on
+# the focused monitor, so umbriel-zen-placer (autostart) moves it.
+[[window_rule]]
+match.app_id = "^zen-beta$"
+default_scrolling_extent = 1.0
+
+# proton mail: autostarted on PC, parked on the Equibop screen's workspace 2 without
+# pulling focus or switching DP-1's view there.
+[[window_rule]]
+match.app_id = "^proton-mail$"
+default_output = "DP-1"
+default_workspace = 2
+default_focused = false
+
+[[window_rule]]
+match.app_id = "^md[.]obsidian[.]Obsidian$"
+default_workspace = 3
+default_fullscreen = true
+
+[[window_rule]]
+match.app_id = "^teams-for-linux$"
+default_fullscreen = true
+
+# equibop: PC only. Full column width in the scrolling layout, not OS fullscreen, so
+# the bar and borders stay visible. A missing output (laptop) falls back to normal
+# placement.
+[[window_rule]]
+match.app_id = "^equibop$"
+default_output = "DP-1"
+default_workspace = 1
+default_scrolling_extent = 1.0
+
+# Noctalia's settings window, floating at its own size.
+[[window_rule]]
+match.app_id = "^dev[.]noctalia[.]Noctalia$"
+default_floating = true
+default_floating_size_px = { width = 1080, height = 920 }
+
+# Screen-share picker, from umbriel's packaged config.
+[[window_rule]]
+match.app_id = "^dev[.]noctalia[.]UmbrielSharePicker$"
+default_floating = true
+default_floating_size_px = { width = 800, height = 600 }
+
+# steam: floating except the main window. Steam sets its title after mapping;
+# umbriel re-checks opening rules when that title arrives.
+[[window_rule]]
+match.app_id = "^steam$"
+default_floating = true
+
+[[window_rule]]
+match.app_id = "^steam$"
+match.title = "^[Ss]team$"
+default_floating = false
+
+# Toasts in the corner, without stealing focus (is_open_silent).
+[[window_rule]]
+match.app_id = "^steam$"
+match.title = "notificationtoasts"
+default_floating = true
+default_focused = false
+default_position = { x = 0, y = 0, anchor = "bottom_right" }

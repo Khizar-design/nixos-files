@@ -1,0 +1,12 @@
+# From mango autostart-pc.sh. Xwayland is on demand and umbriel.service brings up
+# graphical-session.target itself, so neither needs starting here. noctalia finds
+# its native umbriel backend through UMBRIEL_SOCKET, so the
+# XDG_CURRENT_DESKTOP=wlroots workaround mango needs does not apply.
+[general]
+autostart = [
+  "noctalia-shell",
+  "wl-paste --watch cliphist store",
+  "equibop",
+  "proton-mail",
+  "umbriel-zen-placer DP-1",
+]

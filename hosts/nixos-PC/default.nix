@@ -7,11 +7,13 @@
   networking.hostName = "nixos-PC";
 
   # ── Desktop ────────────────────────────────────────────────────────────────
-  # Both installed; with niri enabled khizar.desktop.default resolves to niri,
-  # so it is what greetd/the greeter start. mango stays as a fallback session.
+  # Trying umbriel: greetd autologins into it. mango stays installed as the
+  # fallback — set default back to "mango" to return to it.
   khizar.desktop = {
     niri.enable = false;
     mango.enable = true;
+    umbriel.enable = true;
+    default = "umbriel";
   };
 
   services.greetd.settings.default_session.user = "khizar";
