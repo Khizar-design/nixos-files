@@ -96,6 +96,13 @@
 "Mod+F" = { action = "window-toggle-fullscreen", repeat = false }
 "Mod+W" = { action = "column-toggle-tabbed", repeat = false }
 
+# Jump straight to one of umbriel's four layouts, same keys as keybinds-pc.toml.
+# Scrolling is the default here.
+"Mod+F1" = { action = "workspace-set-layout master", repeat = false }
+"Mod+F2" = { action = "workspace-set-layout scrolling", repeat = false }
+"Mod+F3" = { action = "workspace-set-layout dwindle", repeat = false }
+"Mod+F4" = { action = "workspace-set-layout stacking", repeat = false }
+
 # ─── Umbriel Extras (no niri equivalent; same keys as keybinds-pc.toml) ───
 # Stack into the neighbouring column, or split back out of one, so each undoes the
 # other. Plain window-consume-* does nothing with no column on that side.
