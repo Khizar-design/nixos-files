@@ -13,10 +13,7 @@
   khizar.desktop = {
     niri.enable = true;
     mango.enable = true;
-    # Config is ready (dotfiles/umbriel/cfg/*-laptop.toml, ported from niri) but off
-    # until it has proven itself on the PC. Enabling only adds it to the greeter's
-    # picker; also set `default = "umbriel"` to boot into it.
-    umbriel.enable = false;
+    umbriel.enable = true;
   };
 
   # ── Features ───────────────────────────────────────────────────────────────
