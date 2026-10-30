@@ -15,7 +15,7 @@ case ${1:-} in
     grim -o "$output" - | tee "$path" | wl-copy
     ;;
   window)
-    geometry=$(umbriel focused-window --json | jq -r '"\(.x),\(.y) \(.width)x\(.height)"')
+    geometry=$(umbriel focused-window --json | jq -r '"\(.x),\(.y) \(.w)x\(.h)"')
     grim -g "$geometry" - | tee "$path" | wl-copy
     ;;
   *)

@@ -96,6 +96,21 @@
 "Mod+F" = { action = "window-toggle-fullscreen", repeat = false }
 "Mod+W" = { action = "column-toggle-tabbed", repeat = false }
 
+# ─── Umbriel Extras (no niri equivalent; same keys as keybinds-pc.toml) ───
+# Stack into the neighbouring column, or split back out of one, so each undoes the
+# other. Plain window-consume-* does nothing with no column on that side.
+"Mod+Comma" = "window-consume-or-expel-left"
+"Mod+Period" = "window-consume-or-expel-right"
+# Same as Mod+W here; kept so the PC's key works on both machines.
+"Mod+Shift+T" = { action = "column-toggle-tabbed", repeat = false }
+# Ignored while a scratchpad window has focus.
+"Mod+P" = { action = "window-toggle-pinned", repeat = false }
+
+# Space only shows and hides the scratchpad; Ctrl+Space takes a window back out.
+"Mod+Space" = "scratchpad-toggle"
+"Mod+Shift+Space" = { action = "window-move-to-scratchpad", repeat = false }
+"Mod+Ctrl+Space" = { action = "window-restore-from-scratchpad", repeat = false }
+
 # ─── Screenshots ───
 # niri's built-ins, without its interactive UI; see screenshot.sh. Each saves the
 # file and copies the image, as niri does.

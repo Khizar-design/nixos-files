@@ -106,6 +106,20 @@
 "Mod+F3" = { action = "workspace-set-layout dwindle", repeat = false }
 "Mod+F4" = { action = "workspace-set-layout stacking", repeat = false }
 
+# ─── Umbriel Extras (no mango equivalent) ───
+# Stack into the neighbouring column, or split back out of one, so each undoes the
+# other. Plain window-consume-* does nothing with no column on that side.
+"Mod+Comma" = "window-consume-or-expel-left"
+"Mod+Period" = "window-consume-or-expel-right"
+"Mod+Shift+T" = { action = "column-toggle-tabbed", repeat = false }
+# Ignored while a scratchpad window has focus.
+"Mod+P" = { action = "window-toggle-pinned", repeat = false }
+
+# Space only shows and hides the scratchpad; Ctrl+Space takes a window back out.
+"Mod+Space" = "scratchpad-toggle"
+"Mod+Shift+Space" = { action = "window-move-to-scratchpad", repeat = false }
+"Mod+Ctrl+Space" = { action = "window-restore-from-scratchpad", repeat = false }
+
 # ─── Screenshots ───
 "Ctrl+Shift+1" = { action = "spawn grim -g \"$(slurp)\" - | wl-copy", repeat = false }
 "Ctrl+Shift+2" = { action = "spawn grim ~/Pictures/Screenshots/$(date +%Y-%m-%dT%H:%M:%S).png", repeat = false }
