@@ -82,6 +82,26 @@ in
             '';
           });
         })
+
+        # aw-core 0.5.17 requires peewee 3 but nixpkgs' peewee is now 4.x.
+        # Upstream aw-core 0.5.18 allows peewee 4; drop this once nixpkgs bumps it.
+        (final: prev: {
+          pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [
+            (pyfinal: pyprev: {
+              aw-core = pyprev.aw-core.override { peewee = pyfinal.peewee_3; };
+            })
+          ];
+
+          # Already fixed in nixpkgs master; drop once the lock moves past it.
+          aw-qt = prev.aw-qt.overridePythonAttrs {
+            makeWrapperArgs = [
+              "--suffix"
+              "PATH"
+              ":"
+              (final.lib.makeBinPath [ final.xdg-utils ])
+            ];
+          };
+        })
       ];
     }
 
