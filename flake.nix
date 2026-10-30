@@ -19,6 +19,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Follows our nixpkgs like every other input, which rules out umbriel.cachix.org
+    # (its store paths only match umbriel's own lock) so this compiles locally —
+    # but it keeps umbriel's libgbm/EGL on the same mesa as /run/opengl-driver.
+    umbriel = {
+      url = "github:noctalia-dev/umbriel";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
