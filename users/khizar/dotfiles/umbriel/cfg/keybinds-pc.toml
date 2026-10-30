@@ -45,13 +45,15 @@
 "Mod+Ctrl+K" = "window-swap-up"
 "Mod+Ctrl+J" = "window-swap-down"
 
-"Mod+Shift+H" = "output-focus-left"
-"Mod+Shift+L" = "output-focus-right"
+# next/previous, not left/right: umbriel's directional actions stop at the last
+# screen, while mango's wrap, so either key flips between the two monitors.
+"Mod+Shift+H" = "output-focus-previous"
+"Mod+Shift+L" = "output-focus-next"
 "Mod+Shift+K" = "output-focus-up"
 "Mod+Shift+J" = "output-focus-down"
 
-"Mod+Shift+Ctrl+H" = "window-move-to-output-left"
-"Mod+Shift+Ctrl+L" = "window-move-to-output-right"
+"Mod+Shift+Ctrl+H" = "window-move-to-output-previous"
+"Mod+Shift+Ctrl+L" = "window-move-to-output-next"
 "Mod+Shift+Ctrl+K" = "window-move-to-output-up"
 "Mod+Shift+Ctrl+J" = "window-move-to-output-down"
 

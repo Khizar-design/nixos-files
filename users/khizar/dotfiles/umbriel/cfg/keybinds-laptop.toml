@@ -47,8 +47,10 @@
 "Mod+Ctrl+Home" = "column-move-to-first"
 "Mod+Ctrl+End" = "column-move-to-last"
 
-"Mod+Shift+H" = "output-focus-left"
-"Mod+Shift+L" = "output-focus-right"
+# next/previous wrap, so either key flips between the two outputs; left/right would
+# stop at the last screen. Same keys as keybinds-pc.toml.
+"Mod+Shift+H" = "output-focus-previous"
+"Mod+Shift+L" = "output-focus-next"
 "Mod+Shift+K" = "output-focus-up"
 "Mod+Shift+J" = "output-focus-down"
 
