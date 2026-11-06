@@ -120,6 +120,7 @@ in
         btop
         openssh
         bash-completion
+        kdePackages.okular
       ];
     })
 
@@ -132,10 +133,9 @@ in
         tumbler
         swaybg
         wlsunset
-        xwayland-satellite # niri looks it up in PATH and spawns it on demand
+        xwayland-satellite
         wl-clipboard
         cliphist
-        # niri had screenshots built in; mango does not.
         grim
         slurp
       ];
