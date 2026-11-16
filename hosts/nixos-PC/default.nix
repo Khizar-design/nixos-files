@@ -13,7 +13,7 @@
     niri.enable = true;
     mango.enable = true;
     umbriel.enable = true;
-    default = "niri";
+    default = "mango";
   };
 
   services.greetd.settings.default_session.user = "khizar";
