@@ -10,10 +10,10 @@
   # Trying umbriel: greetd autologins into it. mango stays installed as the
   # fallback — set default back to "mango" to return to it.
   khizar.desktop = {
-    niri.enable = false;
+    niri.enable = true;
     mango.enable = true;
     umbriel.enable = true;
-    default = "umbriel";
+    default = "niri";
   };
 
   services.greetd.settings.default_session.user = "khizar";
