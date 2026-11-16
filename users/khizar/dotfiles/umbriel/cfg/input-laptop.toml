@@ -22,7 +22,7 @@ sensitivity = 0.0
 
 # focus-follows-mouse is commented out in niri.
 [input.focus]
-follows_mouse = false
+follows_mouse = "off"
 
 [input.cursor]
 theme = "capitaine-cursors"

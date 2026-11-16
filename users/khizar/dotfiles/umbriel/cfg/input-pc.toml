@@ -30,7 +30,7 @@ sensitivity = 0.0
 
 # sloppy_focus=0
 [input.focus]
-follows_mouse = false
+follows_mouse = "off"
 
 # cursor_theme, cursor_size, and warp_cursor=1 as follows_focus.
 [input.cursor]
