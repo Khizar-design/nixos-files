@@ -12,6 +12,17 @@
         input device on the ThinkPad E14.
       '';
     };
+
+    asixEthernetFix = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = ''
+        Force the ASIX AX88179B USB-C ethernet adapter (0b95:1790) into USB
+        config 1 so the vendor ax88179_178a driver binds. It defaults to
+        config 2 (CDC NCM), where cdc_ncm never reports carrier — the link
+        stays NO-CARRIER and NetworkManager marks it "unavailable".
+      '';
+    };
   };
 
   config = lib.mkIf config.khizar.features.laptop.enable {
@@ -62,9 +73,13 @@
 
     services.fwupd.enable = true;
 
-    services.udev.extraRules =
-      lib.mkIf config.khizar.features.laptop.suppressElanTouchpad ''
+    services.udev.extraRules = lib.mkMerge [
+      (lib.mkIf config.khizar.features.laptop.suppressElanTouchpad ''
         ACTION=="add|change", ATTRS{name}=="ELAN901C:00 04F3:2EDE", ENV{LIBINPUT_IGNORE_DEVICE}="1"
-      '';
+      '')
+      (lib.mkIf config.khizar.features.laptop.asixEthernetFix ''
+        ACTION=="add", SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", ATTR{idVendor}=="0b95", ATTR{idProduct}=="1790", ATTR{bConfigurationValue}!="1", ATTR{bConfigurationValue}="1"
+      '')
+    ];
   };
 }
